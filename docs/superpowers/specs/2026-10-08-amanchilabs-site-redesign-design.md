@@ -1,7 +1,28 @@
 # Amanchi Labs Site Redesign — Design Spec
-**Date:** 2026-10-08  
+**Date:** 2026-10-08 (revised 2026-10-09)  
 **Status:** Approved for implementation planning  
 **Project:** amanchilabs.com — full visual and structural redesign
+
+---
+
+## Visual Reference
+
+The image below is a **conceptual exploration only** — not an approved implementation design. The product screens and figures shown are illustrative and do not represent verified application functionality.
+
+![Amanchi Labs reference concept](./AmanchiLabsMainScreen-reference.png)
+
+**What to take from this image:**
+- Editorial sidebar treatment and typography quality ✅
+- Left sidebar structure: brand mark + nav items + contact at bottom ✅
+- Overview panel with two side-by-side product cards at bottom ✅
+- Strong Instrument Serif display type + generous whitespace ✅
+
+**What to discard:**
+- Large scenic hero photography — replaced by editorial panel architecture ❌
+- Fabricated financial figures ("$1,328,450") — must not appear in implementation ❌
+- "Skin Health Score: 92" — fabricated health metric, not to be used ❌
+- WealthPrivate "Join the early access list" if no actual waitlist exists ❌
+- Any product status label ("Available Now", etc.) that misrepresents actual readiness ❌
 
 ---
 
@@ -12,15 +33,18 @@ Replace the current long-scroll marketing page with a premium, app-style experie
 
 The site must feel like a world-class software studio — light editorial foundation with dark immersive product showcases — and answer three questions within five seconds per view: *What is this? Why should I care? What can I do next?*
 
+**Guiding principle:** One screen. One clear message. One meaningful action.
+
 ---
 
 ## 2. Design Principles
 
 | Principle | Directive |
 |---|---|
-| **One screen. One message. One action.** | Each panel is self-contained in a single viewport at standard desktop sizes. No forced scrolling. |
+| **One screen. One message. One action.** | Each panel is self-contained in a single viewport at standard desktop sizes. Scrolling is allowed as a graceful fallback on smaller screens and when browser zoom exceeds 100%, but should never be required on a ≥1280px viewport at 100% zoom. |
 | **Light editorial + dark premium hybrid** | Warm off-white foundation. Product panels are dark and immersive. |
 | **Typography-first** | Strong type hierarchy does the heavy lifting. Copy is minimal, confident, and specific. |
+| **Honest representation** | No fabricated product data, financial figures, health scores, or performance claims. Conceptual UI mockups must be clearly labeled as illustrative. |
 | **No generic SaaS** | No excessive gradients, stock photography, feature-grid lists, or marketing jargon. |
 | **Earned trust** | Privacy, local-first, user ownership are woven into the experience — not added as a footnote. |
 
@@ -48,44 +72,47 @@ The site must feel like a world-class software studio — light editorial founda
 └─────────────────┴──────────────────────────────────────────────┘
 ```
 
+**Smaller laptop / zoom fallback:** On viewports between 768px–1280px, or when browser zoom causes content overflow, panels may scroll vertically within the canvas. Content must never clip or overflow hidden. The sidebar remains fixed; the canvas becomes scrollable.
+
 ### Mobile (< 768px)
 - Left sidebar collapses into a top navigation bar.
-- Hamburger or compact product switcher at top-right.
-- Panels may scroll vertically within the viewport when content requires it at small screen sizes.
+- Compact product switcher or hamburger at top-right.
+- Panels scroll vertically. No horizontal scroll ever.
 - Touch-friendly tap targets (min 44px).
 
 ### Tablet (768px–1023px)
-- Sidebar may collapse to an icon-only rail (48px wide) or overlay on demand.
-- Content canvas fills remaining space.
+- Sidebar collapses to an icon-only rail (48px) or overlays on demand.
+- Canvas fills remaining space. Vertical scroll permitted.
 
 ---
 
 ## 4. Left Sidebar Specification
 
 **Width:** 220–240px (desktop)  
-**Background:** Warm off-white (`#FAFAF8` or similar)  
+**Background:** Warm off-white (`#FAFAF8`)  
 **Position:** Fixed, full viewport height  
 **Right border:** Subtle 1px separator (`rgba(0,0,0,0.06)`)
 
 ### Anatomy (top → bottom)
 
-1. **Studio Brand** — `AMANCHI LABS` wordmark + mark, top section. Generous top padding. Not a link.
-2. **Primary Navigation** — vertical stack with generous spacing:
+1. **Studio Brand** — `AMANCHI LABS` wordmark + geometric mark. Generous top padding. Not a link (clicking logo navigates to Overview).
+2. **Primary Navigation** — vertical stack with generous spacing and clear active-state indicator:
    - Overview
    - WealthPrivate
    - DermaPrivate
    - Principles
-3. **Contact** — pinned near bottom, subdued typographic treatment (not a nav item — a discreet link/button)
-4. **Footer micro-copy** — optional: `© 2026 Amanchi Labs` in the smallest possible weight at the very bottom.
+3. **Contact** — pinned near bottom with a subtle mail icon, discreet typographic treatment.
+4. **Footer micro-copy** — `© 2026 Amanchi Labs` at very bottom in smallest possible weight.
 
 ### Active State
-- Active item: Charcoal text weight shift + a 2px left accent line or subtle background pill.
-- No heavy borders, no chevrons, no nested sub-menus.
+- Active item: charcoal text + 2px left accent bar (as shown in reference image).
+- Inactive items: muted `#999`, no decoration.
+- Hover: smooth opacity shift, 100ms.
+- No heavy borders, chevrons, nested sub-menus, or badge counts.
 
 ### Typography (Sidebar)
 - Studio name: geometric sans, `11–12px`, tracked uppercase, charcoal.
-- Nav items: refined sans, `14px`, medium weight, charcoal `#1C1C1C` (active) / muted `#999` (inactive).
-- Hover: smooth opacity/color shift.
+- Nav items: Inter, `14px`, medium weight for active, regular for inactive.
 
 ---
 
@@ -93,11 +120,13 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Concern | Solution |
 |---|---|
-| **URL state** | Each panel maps to a URL hash or path: `/`, `/wealth`, `/derma`, `/principles`, `/contact` |
-| **Browser history** | `history.pushState` on panel switch so back/forward work naturally |
-| **Keyboard navigation** | Tab order: sidebar links → content canvas. Arrow keys cycle sidebar items. |
-| **Transitions** | Crossfade (`opacity` transition 150–200ms ease) on panel switch. No sliding. No page reload. |
-| **Accessibility** | `role="navigation"`, `aria-current="page"` on active item. `role="main"` on canvas. Focus management on panel switch. |
+| **URL state** | Hash routing: `/#overview`, `/#wealth`, `/#derma`, `/#principles`, `/#contact` |
+| **Browser history** | `history.pushState` on panel switch — back/forward work naturally |
+| **Direct links** | Sharing `/#wealth` opens directly to WealthPrivate panel |
+| **Keyboard navigation** | Tab order: sidebar links → canvas content. Arrow keys cycle sidebar items. |
+| **Transitions** | Crossfade (`opacity` 150–200ms ease-in-out). No sliding. No page reload. |
+| **Accessibility** | `role="navigation"`, `aria-current="page"` on active item, `role="main"` on canvas, focus management on panel switch |
+| **`prefers-reduced-motion`** | All transitions instantly resolved — panels appear without animation |
 
 ---
 
@@ -105,65 +134,80 @@ The site must feel like a world-class software studio — light editorial founda
 
 ### 6.1 Overview Panel (Default / Home)
 
-**URL:** `/` or `/#overview`  
+**URL:** `/#overview`  
 **Background:** Warm off-white (continuous with sidebar)  
-**Purpose:** Studio identity and portfolio at a glance.
+**Purpose:** Studio identity and product portfolio at a glance.
 
-**Layout:**
-- **Top-left block:** Studio name in editorial serif or geometric display type. Tagline below: *"Private by design. Intelligent by choice."* 
-- **Centre/Right:** Two product cards side by side:
-  - **WealthPrivate card:** Dark charcoal background, product name, one-line descriptor (*"Your financial life. Private. Organized. Understood."*), status badge, → link.
-  - **DermaPrivate card:** Warm ivory/sage background, product name, one-line descriptor (*"Private skincare intelligence. Your routine. Your control."*), status badge, → link.
-- **Below cards (or integrated):** 4-word studio values in subdued uppercase tracking: `PRIVATE · LOCAL · INTENTIONAL · INDEPENDENT`
+**Layout (two zones):**
 
-**Copy:**
-- Headline: `"Two products. One clear principle."`  
-- Sub: `"We build software for the most personal parts of your life — and we build it right."`  
-- No primary CTA button on this panel; the product cards are the CTAs.
+**Top zone — Studio statement:**
+- Eyebrow: `PRODUCTS FOR A MORE PRIVATE WORLD` (small, tracked uppercase, muted)
+- **Headline (Instrument Serif, large):** `"Technology that puts people first."` — or similar owned studio voice
+- **Body (2 sentences max):** `"Amanchi Labs builds thoughtful applications for health, wealth, and everyday life — designed to give people ownership, control, and peace of mind."`
+- **Primary CTA:** `"Explore our products →"` — scrolls/focuses to the product cards below
+
+**Bottom zone — Product cards (side by side):**
+
+| WealthPrivate card | DermaPrivate card |
+|---|---|
+| Dark charcoal background | Warm ivory / muted sage background |
+| Eyebrow: `WEALTHPRIVATE` (spaced uppercase) | Eyebrow: `DERMAPRIVATE` (spaced uppercase) |
+| Headline: `"Your wealth. Your data. Your control."` | Headline: `"Personalized skincare. On your terms."` |
+| 2-line descriptor | 2-line descriptor |
+| CTA: see §6.2 | CTA: `"Learn more →"` |
+| Conceptual UI mockup (right side of card) — **no fabricated financial figures** | Conceptual UI mockup (right side of card) — **no fabricated health scores** |
+| 3 trust attributes at bottom: `Private by design · You own your data · Built for the long term` | 3 trust attributes at bottom: `Your data stays private · Personalized insights · Designed for real life` |
+
+> **Important:** The reference image shows specific financial numbers and a health score. These must **not** appear in the implementation. Mockups must use abstract visualizations (line shapes, placeholders, generic UI chrome) clearly labeled "Illustrative."
 
 ---
 
 ### 6.2 WealthPrivate Panel
 
-**URL:** `/wealth` or `/#wealth`  
-**Split-canvas layout:** Left 40% copy / Right 60% visual
+**URL:** `/#wealth`  
+**Split-canvas layout:** Left ~40% copy / Right ~60% visual  
+**Status label:** `IN DEVELOPMENT` (not "Available Now", not "Coming Soon" — honest, non-promissory)
 
 **Left column — Copy:**
-- Eyebrow: `WEALTHPRIVATE — IN DEVELOPMENT`
-- **Headline (display type, 48–56px):**  
-  `"Your financial life.`  
-  `Private. Organized.`  
-  `Understood."`
+- Eyebrow: `WEALTHPRIVATE` (spaced uppercase, muted)
+- **Status badge:** `IN DEVELOPMENT` (small, neutral)
+- **Headline (Instrument Serif, 48–56px, white on dark left half):**  
+  `"Your wealth.`  
+  `Your data.`  
+  `Your control."`
 - **Value proposition (2 lines, 16px):**  
-  `"Turn scattered financial documents into a private, source-backed history of your financial life. On your device."`
+  `"Turn scattered financial documents into a private, source-backed history of your financial life — organized on your device."`
 - **3 attribute chips:** `Local-first · Source-traced · Optional AI`
-- **CTA:** `"Join the early access list →"` (links to email or waitlist)
-- **Trust footnote:** `"WealthPrivate does not store your financial data on its servers. Your finances. Your device."`
+- **CTA:** `"Get in touch →"` → links to `founder@amanchilabs.com`  
+  *(No "Join waitlist" unless a working waitlist exists. Email CTA is honest and direct.)*
+- **Trust footnote:** `"WealthPrivate is designed so your financial data stays on your device. We do not store it."`
 
 **Right column — Visual:**
-- Full-height dark panel: deep charcoal `#141414` or near-black.
-- Conceptual UI mockup: a premium financial dashboard — net worth line graph, document list, financial timeline. Clearly marked as **"Conceptual preview"** in small text.
-- Restrained metallic or slate accent lines (not gold — too flashy).
-- Optional: floating "Financial Fact" card showing a traced document source, labeled as illustrative.
+- Full-height dark panel: deep charcoal `#141414`
+- **Abstract conceptual mockup** of a financial dashboard: clean document list, a simplified timeline or graph shape (no specific dollar amounts), source-trace UI element
+- Clearly labeled `"Illustrative — not a representation of released software"`
+- Restrained slate/white accents — no gold, no green ticker effects
 
 **Visual identity:**
-- Dark charcoal + slate + white text
-- Typeface: geometric or transitional serif for display, system/geometric sans for UI
-- Tone: financial precision, privacy, intelligence
+- Deep charcoal + slate + white text
+- Instrument Serif headlines, Inter body
+- Tone: financial precision, privacy, intelligence, long-term trust
 
 ---
 
 ### 6.3 DermaPrivate Panel
 
-**URL:** `/derma` or `/#derma`  
-**Split-canvas layout:** Left 40% copy / Right 60% visual
+**URL:** `/#derma`  
+**Split-canvas layout:** Left ~40% copy / Right ~60% visual  
+**Status label:** Use actual honest status — if publicly available, say so; if not, omit "Available Now"
 
 **Left column — Copy:**
-- Eyebrow: `DERMAPRIVATE — AVAILABLE NOW`
-- **Headline (display type, 48–56px):**  
-  `"Your skincare.`  
-  `Organized. Understood.`  
-  `Private."`
+- Eyebrow: `DERMAPRIVATE` (spaced uppercase, muted)
+- **Status badge:** Use actual current status (confirm before shipping)
+- **Headline (Instrument Serif, 48–56px):**  
+  `"Personalized`  
+  `skincare.`  
+  `On your terms."`
 - **Value proposition (2 lines, 16px):**  
   `"Plan and understand your skincare routine with ingredient-aware intelligence. AI may assist — you decide what to keep."`
 - **3 attribute chips:** `Routine planning · Ingredient-aware · Optional AI`
@@ -171,27 +215,27 @@ The site must feel like a world-class software studio — light editorial founda
 - **Trust footnote:** `"Core planning is local-first. AI is optional and user-initiated."`
 
 **Right column — Visual:**
-- Full-height warm panel: warm ivory `#F5F0E8` or muted sage `#E8EDE8`.
-- Elevated version of the existing phone mockup — larger, more spacious, with additional detail cards floating around it (morning routine card, ingredient note card).
-- Warm sage and cream tones throughout.
-- Clearly labeled as illustrative if any unreleased features are shown.
+- Full-height warm panel: warm ivory `#F5F0E8` transitioning to muted sage
+- Elevated phone mockup (built from existing `RoutinePhone` component, redesigned to match editorial quality)
+- Use actual product UI where available; label any additional illustrative screens clearly
+- Warm sage and cream tones, soft natural feel
 
 **Visual identity:**
-- Warm ivory + muted sage + soft charcoal text
-- Tone: calm, thoughtful, personal, trustworthy
+- Warm ivory + muted sage + charcoal text
+- Tone: calm, personal, thoughtful, trustworthy
 
 ---
 
 ### 6.4 Principles Panel
 
-**URL:** `/principles` or `/#principles`  
-**Background:** Warm off-white
+**URL:** `/#principles`  
+**Background:** Warm off-white  
+**Purpose:** Studio philosophy — what Amanchi Labs believes about software.
 
-**Purpose:** Studio philosophy — what Amanchi Labs believes about how software should be built.
+**Layout:** Editorial. No panel-level scroll required on ≥1280px at 100% zoom.
 
-**Layout:** Minimal, editorial. No section within this panel requires scrolling.
-- **Headline:** `"Technology should work for you."`
-- **4 principles in a 2×2 grid or clean vertical list** (whichever fits viewport cleanly):
+- **Headline (Instrument Serif):** `"Technology should work for you."`
+- **4 principles in a 2×2 grid or clean vertical list:**
 
 | # | Title | Body |
 |---|---|---|
@@ -200,36 +244,44 @@ The site must feel like a world-class software studio — light editorial founda
 | 03 | You stay in control | A suggestion is a starting point. People decide what to save, change, or leave behind. |
 | 04 | Made for real life | Focused tools for ordinary moments — carefully made, useful, and easy to understand. |
 
-- **Studio footnote:** `"Amanchi Labs builds products for the most personal parts of life — skincare, finances — where trust is earned, not assumed."`
+- **Studio footnote:** `"Amanchi Labs builds software for the most personal parts of life — where trust is earned, not assumed."`
 
 ---
 
 ### 6.5 Contact Panel
 
-**URL:** `/contact` or `/#contact`  
-**Background:** Very dark charcoal (`#141414`) for contrast/impact — an exception to the light editorial foundation, used intentionally here.
-
-**Purpose:** Brief, human, confident. Not a form.
+**URL:** `/#contact`  
+**Background:** Deep charcoal `#141414`  
+**Purpose:** Direct, human, confident. No form. No friction.
 
 **Layout:**
-- **Studio mark** centered or anchored top-left.
-- **Headline:** `"Let's build something useful."`
-- **Body (2 sentences max):** `"Thoughtful questions, product feedback, or a good idea for a useful app — we'd like to hear from you."`
-- **CTA:** `hello@amanchilabs.com` as a mailto link, styled as a large, clean typographic link (not a button).
-- **Below:** `© 2026 Amanchi Labs · Independent product studio`
+- **Headline (Instrument Serif, large, white):** `"Let's build something useful."`
+- **Supporting copy:** `"Thoughtful questions, product feedback, or a good idea for a useful app — we'd like to hear from you."`
+
+**Two contact options (understated, typographic links — not buttons):**
+
+| Context | Email | Label |
+|---|---|---|
+| Partnerships & business | `founder@amanchilabs.com` | `Partnerships and business inquiries` |
+| Product support | `support@amanchilabs.com` | `Product support and customer assistance` |
+
+- **Footer:** `© 2026 Amanchi Labs · Independent product studio`
+- No social media icons unless accounts actively maintained.
+- No contact form.
 
 ---
 
 ## 7. Typography System
 
-| Role | Typeface | Notes |
-|---|---|---|
-| Display / headlines | Instrument Serif *or* Playfair Display (self-hosted/Google) | For editorial impact. Alternately: DM Serif Display. |
-| Body / UI | Inter *or* Geist (Google/Vercel open) | Clean geometric sans. Currently used in most premium software sites. |
-| Sidebar nav | Inter / Geist, medium | 14px, generous letter-spacing for nav items |
-| Monospace accents | JetBrains Mono | Optional for status badges or code-like UI elements |
+| Role | Typeface | Size | Notes |
+|---|---|---|---|
+| Display / headlines | **Instrument Serif** | 40–64px | Editorial impact. Load from Google Fonts. |
+| Body / UI | **Inter** | 14–16px | Clean geometric sans. Google Fonts or Bunny Fonts. |
+| Sidebar nav | Inter, medium | 14px | Generous letter-spacing for tracked items |
+| Eyebrows / labels | Inter, regular | 11–12px | Uppercase, tracked `0.12em` |
+| Monospace accents | JetBrains Mono | 12px | Optional: status badges, code-like elements |
 
-> **Note:** Font choice must be confirmed before implementation. Fonts must be either self-hosted or loaded from Google Fonts/Bunny Fonts for performance. No Adobe Typekit.
+**Font loading:** Self-host or load from Google Fonts / Bunny Fonts. No Adobe Typekit. Preload critical display font to prevent FOUT.
 
 ---
 
@@ -237,25 +289,27 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Token | Value | Usage |
 |---|---|---|
-| `--color-canvas` | `#FAFAF8` | Main background, sidebar |
+| `--color-canvas` | `#FAFAF8` | Main background, sidebar, light panels |
 | `--color-ink` | `#1C1C1C` | Primary text, headings |
-| `--color-muted` | `#6B6B6B` | Secondary text, inactive nav |
+| `--color-muted` | `#6B6B6B` | Secondary text, inactive nav, eyebrows |
 | `--color-line` | `rgba(0,0,0,0.06)` | Sidebar border, dividers |
-| `--color-wealth-bg` | `#141414` | WealthPrivate panel right, Contact panel |
+| `--color-wealth-bg` | `#141414` | WealthPrivate right panel, Contact panel |
 | `--color-wealth-text` | `#F0F0EC` | Text on dark panels |
-| `--color-derma-bg` | `#F5F0E8` | DermaPrivate panel right |
+| `--color-derma-bg` | `#F5F0E8` | DermaPrivate right panel |
 | `--color-derma-accent` | `#A8B8A0` | Sage accent for DermaPrivate |
-| `--color-accent-line` | `#1C1C1C` | Active sidebar indicator |
+| `--color-accent-bar` | `#1C1C1C` | Active sidebar left indicator (2px bar) |
+| `--color-chip-bg` | `rgba(28,28,28,0.08)` | Attribute chip background on light panels |
+| `--color-chip-bg-dark` | `rgba(255,255,255,0.12)` | Attribute chip background on dark panels |
 
 ---
 
 ## 9. Transitions & Motion
 
-- **Panel switch:** `opacity` crossfade, 150ms ease-in-out. No sliding — prevents motion sickness and keeps it premium.
-- **Sidebar hover:** `color` and `opacity` shift only, 100ms.
+- **Panel switch:** `opacity` crossfade 150–200ms ease-in-out. No sliding.
+- **Sidebar hover:** `color` and `opacity` only, 100ms.
 - **Active indicator:** Immediate, no animation.
-- **`prefers-reduced-motion`:** All transitions disabled when user has this set. Panels appear instantly.
-- **No entrance animations, no parallax, no scroll-triggered effects.** They are all banned in this design for quality control.
+- **`prefers-reduced-motion`:** All transitions disabled — panels appear instantly.
+- **Banned:** entrance animations, parallax, scroll-triggered effects, auto-playing video, loading spinners on the main experience.
 
 ---
 
@@ -263,64 +317,104 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Breakpoint | Behavior |
 |---|---|
-| `≥ 1024px` | Full desktop layout: fixed 240px sidebar + full canvas |
-| `768px – 1023px` | Sidebar collapses to icon-only rail (48px) or disappears behind a top hamburger menu. Canvas fills viewport. |
-| `< 768px` | Top navigation bar with studio name left, menu right. Tap opens an overlay menu listing all panels. Panels may scroll vertically if content exceeds viewport. |
+| `≥ 1280px` | Full desktop: 240px sidebar + canvas. No forced scroll on standard panels. |
+| `1024px – 1279px` | Sidebar at 220px. Canvas panels may scroll if needed. |
+| `768px – 1023px` | Sidebar collapses; icon rail (48px) or top hamburger menu. Canvas fills. Scroll permitted. |
+| `< 768px` | Top bar: studio name left, menu button right. Overlay drawer for nav. Panels scroll freely. |
 
 ---
 
 ## 11. URL & Routing Strategy
 
-Use **client-side hash routing** (no server config needed, works with static hosting/Vite):
-- `/#overview` → Overview panel
-- `/#wealth` → WealthPrivate panel  
-- `/#derma` → DermaPrivate panel
-- `/#principles` → Principles panel
-- `/#contact` → Contact panel
+**Client-side hash routing** (static hosting compatible, no server config required):
 
-On load, read `window.location.hash` to set initial active panel. Update hash on nav click. Listen for `hashchange` to support browser back/forward. No page reloads.
+| Hash | Panel |
+|---|---|
+| `/#overview` | Overview (default) |
+| `/#wealth` | WealthPrivate |
+| `/#derma` | DermaPrivate |
+| `/#principles` | Principles |
+| `/#contact` | Contact |
+
+On load: read `window.location.hash` → set initial active panel. On nav click: update hash via `history.pushState`. Listen for `hashchange` for back/forward support.
 
 ---
 
-## 12. Component Inventory
+## 12. Honesty & Representation Requirements
+
+These are non-negotiable requirements that must be verified before any panel ships:
+
+1. **No fabricated financial figures** — no dollar amounts, portfolio totals, account balances, or returns in any mockup, conceptual or otherwise.
+2. **No fabricated health or skincare scores** — no skin health scores, ingredient compatibility percentages, or similar metrics that do not reflect actual software output.
+3. **All conceptual UI must be labeled** — any mockup that is not a direct screenshot of the shipped product must include a small, visible label: `"Illustrative — not a representation of released software."`
+4. **Product status must be honest and current:**
+   - WealthPrivate: `IN DEVELOPMENT` — no waitlist CTA unless one exists
+   - DermaPrivate: actual status only — do not state "Available Now" until independently verified
+5. **CTA targets must be working** — no links to 404 pages, placeholder URLs, or broken waitlists.
+6. **Email addresses must be live** — `founder@amanchilabs.com` and `support@amanchilabs.com` must be receiving before the site goes live.
+
+---
+
+## 13. Component Inventory
 
 | Component | Description |
 |---|---|
-| `Sidebar` | Fixed nav: brand + nav items + contact link |
-| `NavItem` | Individual sidebar nav item with active state |
-| `PanelShell` | Full-screen canvas wrapper with crossfade transition |
-| `OverviewPanel` | Studio intro + 2 product cards |
-| `ProductCard` | Mini card used in Overview (dark or light variant) |
+| `Sidebar` | Fixed nav: brand mark + nav items + contact link + copyright |
+| `NavItem` | Sidebar item with active indicator bar |
+| `PanelShell` | Full-screen canvas wrapper with crossfade transition logic |
+| `OverviewPanel` | Studio headline + two side-by-side product cards |
+| `ProductCard` | Card component used in Overview (dark + light variants) |
 | `WealthPanel` | Split-canvas WealthPrivate panel |
 | `DermaPanel` | Split-canvas DermaPrivate panel |
 | `PrinciplesPanel` | Principles editorial panel |
-| `ContactPanel` | Dark contact panel |
-| `MobileNav` | Top nav bar + overlay menu for mobile |
-| `ConceptualMockup` | WealthPrivate UI illustration (financial dashboard) |
-| `RoutinePhone` | Elevated DermaPrivate phone mockup (from existing code) |
-| `AttributeChip` | Small pill label: "Local-first", "Optional AI", etc. |
+| `ContactPanel` | Dark contact panel with two email links |
+| `MobileNav` | Top nav bar + overlay drawer for mobile |
+| `AttributeChip` | Small pill: "Local-first", "Optional AI", etc. |
+| `StatusBadge` | In-development / status indicator |
+| `ConceptualLabel` | Small "Illustrative" watermark for mockup panels |
+| `RoutinePhone` | Elevated DermaPrivate phone mockup (from existing code, restyled) |
+| `WealthMockup` | Abstract WealthPrivate UI illustration (no financial data) |
 
 ---
 
-## 13. Out of Scope
+## 14. Out of Scope
 
 - No blog or article system.
-- No analytics or tracking scripts (privacy-first studio — no cookies or tracking pixels).
-- No contact form (email link only).
+- No analytics or tracking scripts (privacy-first studio — no cookies or tracking pixels without consent).
+- No contact form — email links only.
 - No e-commerce or payment flows.
 - No user accounts or authentication.
-- No backend; this remains a static Vite/React site deployed as before.
+- No backend — remains a static Vite/React site.
+- No stock photography or scenic hero images in the implementation.
 
 ---
 
-## 14. Success Criteria
+## 15. Decisions Log
 
-A viewer landing on the site should be able to:
+| Area | Decision |
+|---|---|
+| Founder contact | `founder@amanchilabs.com` for partnerships and business |
+| Product support | `support@amanchilabs.com` for customer assistance |
+| Typography | Instrument Serif (display) + Inter (UI/body) |
+| WealthPrivate visuals | Original abstract conceptual mockups — no financial data |
+| DermaPrivate visuals | Actual product UI where available; abstract + labeled otherwise |
+| Contact panel | Dark charcoal `#141414` background — evaluate visually before final ship |
+| Reference image | Conceptual reference only — architecture, scenic photo, and fabricated data not adopted |
+| Scroll policy | No forced scroll on ≥1280px; graceful scroll fallback for smaller screens and zoom |
+| WealthPrivate CTA | `"Get in touch →"` → `founder@amanchilabs.com` (no fake waitlist) |
+| Status language | `IN DEVELOPMENT` for WealthPrivate; verified actual status for DermaPrivate |
+
+---
+
+## 16. Success Criteria
+
+A viewer landing on the site must be able to:
 
 1. Understand what Amanchi Labs does in **< 5 seconds** on the Overview panel.
 2. Navigate to WealthPrivate or DermaPrivate and understand each product in **< 5 seconds**.
-3. Find the contact email without any searching.
-4. Experience zero forced scrolling on a standard 1440×900 desktop viewport.
-5. Use the site fully on a 375px mobile screen.
-6. Navigate entirely via keyboard.
-7. Share a direct URL to a specific product panel.
+3. Find both contact email addresses without any searching.
+4. Experience **zero forced scrolling** on a ≥1280px desktop viewport at 100% zoom.
+5. Use the site fully on a **375px mobile screen**.
+6. Navigate entirely via **keyboard**.
+7. Share a **direct URL** to a specific product panel and land on it correctly.
+8. Confirm that **no fabricated product data** appears anywhere on the site.
