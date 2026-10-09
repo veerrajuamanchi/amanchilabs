@@ -1,0 +1,115 @@
+.wealth-mockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.wealth-mockup__chrome {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid color-mix(in srgb, var(--color-wealth-text) 12%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-wealth-text) 4%, transparent);
+}
+
+.wealth-mockup__header,
+.wealth-mockup__doc-row,
+.wealth-mockup__trace {
+  display: flex;
+  align-items: center;
+}
+
+.wealth-mockup__header { justify-content: space-between; }
+
+.wealth-mockup__app-name {
+  color: var(--color-wealth-text);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.wealth-mockup__header-mark,
+.wealth-mockup__trace-mark {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-wealth-text);
+  opacity: 0.45;
+}
+
+.wealth-mockup__section-label {
+  color: var(--color-wealth-text);
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.wealth-mockup__doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wealth-mockup__doc-row {
+  gap: 10px;
+  min-height: 30px;
+}
+
+.wealth-mockup__doc-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--color-wealth-text);
+  opacity: 0.55;
+}
+
+.wealth-mockup__doc-icon svg { width: 100%; height: 100%; }
+
+.wealth-mockup__doc-label {
+  flex: 1;
+  color: var(--color-wealth-text);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.wealth-mockup__doc-chevron {
+  color: var(--color-wealth-text);
+  font-size: 16px;
+  opacity: 0.45;
+}
+
+.wealth-mockup__trace {
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid color-mix(in srgb, var(--color-wealth-text) 12%, transparent);
+  border-radius: 7px;
+}
+
+.wealth-mockup__trace-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.wealth-mockup__trace-title,
+.wealth-mockup__trace-detail {
+  color: var(--color-wealth-text);
+  font-family: var(--font-ui);
+  font-size: 10px;
+}
+
+.wealth-mockup__trace-title { opacity: 0.9; }
+.wealth-mockup__trace-detail { opacity: 0.5; }
+.wealth-mockup__trace-icon { color: var(--color-wealth-text); opacity: 0.55; }
