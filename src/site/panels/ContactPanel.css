@@ -1,0 +1,90 @@
+.contact-panel {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 56px 64px;
+  background: var(--color-wealth-bg);
+}
+
+.contact-panel__inner {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-panel__eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240, 240, 236, 0.52);
+}
+
+.contact-panel__heading {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-wealth-text);
+}
+
+.contact-panel__heading em { font-style: italic; }
+
+.contact-panel__sub {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(240, 240, 236, 0.60);
+  max-width: 400px;
+}
+
+.contact-panel__options {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.contact-panel__link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  transition: var(--transition-hover);
+}
+
+.contact-panel__link:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.contact-panel__link:hover .contact-panel__link-email { color: var(--color-wealth-text); }
+.contact-panel__link:focus-visible { outline: 2px solid var(--color-wealth-text); outline-offset: 4px; }
+
+.contact-panel__link-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240, 240, 236, 0.52);
+}
+
+.contact-panel__link-email {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: rgba(240, 240, 236, 0.75);
+  transition: var(--transition-hover);
+}
+
+.contact-panel__foot {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: rgba(240, 240, 236, 0.52);
+  padding-top: 12px;
+}
+
+@media (max-width: 767px) {
+  .contact-panel { padding: 40px 24px; align-items: flex-start; }
+  .contact-panel__link-email { overflow-wrap: anywhere; }
+}
