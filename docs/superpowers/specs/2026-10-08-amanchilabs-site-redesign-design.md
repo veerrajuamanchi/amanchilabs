@@ -1,7 +1,29 @@
 # Amanchi Labs Site Redesign — Design Spec
-**Date:** 2026-10-08 (revised 2026-10-09)  
+**Date:** 2026-10-08 (revised 2026-10-09, final refinements 2026-10-09)  
 **Status:** Approved for implementation planning  
 **Project:** amanchilabs.com — full visual and structural redesign
+
+## Final Pre-Implementation Refinements (Approved 2026-10-09)
+
+These four requirements are additions to the approved spec and must be reflected in the implementation plan:
+
+1. **Routing sync:** Hash routing, React navigation state, and browser back/forward must remain synchronized at all times. Do not rely on `history.pushState` to trigger `hashchange`. The canonical approach: derive active panel purely from `window.location.hash`; update hash on nav click via `window.location.hash = '#panel'` (which fires `hashchange` natively); listen to `hashchange` for all state updates including browser back/forward. `pushState` must not be used for panel navigation.
+
+2. **Overview CTA:** The `"Explore our products →"` CTA on the Overview panel must navigate the user directly to WealthPrivate (the first product panel) by updating the hash — not by scrolling down within the Overview panel. This keeps the no-forced-scroll principle intact.
+
+3. **Visual acceptance testing:** Before production release, the following viewports and conditions must be visually verified against the design spec:
+   - Desktop 1440×900 (standard) — no scroll on any panel
+   - Laptop 1280×800 — no scroll on any panel
+   - Smaller laptop 1024×768 — graceful scroll fallback if needed
+   - Tablet 768px — sidebar collapsed, content readable
+   - Mobile 375px — top nav, all panels accessible
+   - Browser zoom 125% at 1440px — content must not clip or overflow hidden
+   - Keyboard-only navigation — all panels reachable via Tab/Enter/Arrow
+   - `prefers-reduced-motion` — transitions resolve instantly
+
+4. **Contact panel review gate:** A dedicated visual review of the dark charcoal Contact panel (`#141414`) must occur before production release. Sign-off required before final deployment.
+
+5. **Honesty requirements (§12):** All requirements in Section 12 are non-negotiable and must be preserved in full throughout implementation.
 
 ---
 
