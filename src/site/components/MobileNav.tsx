@@ -24,7 +24,7 @@ export function MobileNav({ activePanel, navigate }: Props) {
     const drawer = drawerRef.current
     const main = document.getElementById('main-content')
     main?.setAttribute('inert', '')
-    drawer?.querySelector<HTMLAnchorElement>('a')?.focus()
+    drawer?.querySelector<HTMLButtonElement>('button')?.focus()
 
     function onKeyDown(event: globalThis.KeyboardEvent) {
       if (event.key === 'Escape') {
@@ -34,10 +34,10 @@ export function MobileNav({ activePanel, navigate }: Props) {
       }
       if (event.key !== 'Tab' || !drawer) return
 
-      const links = Array.from(drawer.querySelectorAll<HTMLAnchorElement>('a'))
-      if (!links.length) return
-      const first = links[0]
-      const last = links[links.length - 1]
+      const controls = Array.from(drawer.querySelectorAll<HTMLElement>('button, a'))
+      if (!controls.length) return
+      const first = controls[0]
+      const last = controls[controls.length - 1]
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault()
         last.focus()
@@ -95,6 +95,12 @@ export function MobileNav({ activePanel, navigate }: Props) {
       </header>
       {open && (
         <div ref={drawerRef} className="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu" aria-modal="true">
+          <div className="mobile-drawer__header">
+            <span className="mobile-nav__brand">AMANCHI LABS</span>
+            <button className="mobile-drawer__close" type="button" aria-label="Close navigation menu" onClick={() => setOpen(false)}>
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
           <nav aria-label="Primary navigation">
             {NAV_ITEMS.map(({ id, label }) => (
               <a
