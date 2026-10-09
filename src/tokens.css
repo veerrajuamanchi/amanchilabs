@@ -1,0 +1,31 @@
+/* src/tokens.css */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-canvas:       #FAFAF8;
+  --color-ink:          #1C1C1C;
+  --color-muted:        #6B6B6B;
+  --color-line:         rgba(0, 0, 0, 0.06);
+  --color-wealth-bg:    #141414;
+  --color-wealth-text:  #F0F0EC;
+  --color-derma-bg:     #F5F0E8;
+  --color-derma-accent: #A8B8A0;
+  --color-accent-bar:   #1C1C1C;
+  --color-chip-bg:      rgba(28, 28, 28, 0.08);
+  --color-chip-bg-dark: rgba(255, 255, 255, 0.12);
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-ui:      'Inter', system-ui, sans-serif;
+
+  --sidebar-w: 240px;
+
+  --transition-panel: opacity 150ms ease-in-out;
+  --transition-hover: color 100ms, opacity 100ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-panel: none;
+    --transition-hover: none;
+  }
+}
