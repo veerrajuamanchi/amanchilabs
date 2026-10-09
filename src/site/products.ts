@@ -1,23 +1,32 @@
 export type Product = {
+  id: 'derma' | 'wealth'
   name: string
-  category: string
-  description: string
-  status: 'Featured' | 'In development'
+  tagline: string
+  descriptor: string
+  status: 'explore' | 'in-development'
   url?: string
-  image?: string
-  accent: string
-  featured?: boolean
+  dark: boolean
+  trustPoints: [string, string, string]
 }
 
 export const products: Product[] = [
   {
+    id: 'wealth',
+    name: 'WealthPrivate',
+    tagline: 'Your wealth. Your data. Your control.',
+    descriptor: 'A private financial operating system that turns scattered documents into a source-backed history of your financial life.',
+    status: 'in-development',
+    dark: true,
+    trustPoints: ['Private by design', 'You own your data', 'Built for the long term'],
+  },
+  {
+    id: 'derma',
     name: 'DermaPrivate',
-    category: 'Private skincare routine planning',
-    description:
-      'A private skincare companion to organize products and routines, review ingredient-aware findings, and use optional AI assistance on your terms.',
-    status: 'Featured',
+    tagline: 'Personalized skincare. On your terms.',
+    descriptor: 'Plan and understand your skincare routine with ingredient-aware intelligence. AI assists only when you choose.',
+    status: 'explore',
     url: 'https://dermaprivate-website.onrender.com/index.html',
-    accent: 'sage',
-    featured: true,
+    dark: false,
+    trustPoints: ['Your data stays private', 'Personalized insights', 'Designed for real life'],
   },
 ]

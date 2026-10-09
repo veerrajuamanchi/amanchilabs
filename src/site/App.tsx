@@ -1,24 +1,20 @@
-import { useHashRouter } from './hooks/useHashRouter'
+import { useHashRouter, type PanelId } from './hooks/useHashRouter'
 import { Sidebar } from './components/Sidebar'
 import { MobileNav } from './components/MobileNav'
 import { PanelShell } from './components/PanelShell'
-import { PrinciplesPanel } from './panels/PrinciplesPanel'
-import { ContactPanel } from './panels/ContactPanel'
+import { OverviewPanel } from './panels/OverviewPanel'
 import { WealthPanel } from './panels/WealthPanel'
 import { DermaPanel } from './panels/DermaPanel'
-import type { PanelId } from './hooks/useHashRouter'
+import { PrinciplesPanel } from './panels/PrinciplesPanel'
+import { ContactPanel } from './panels/ContactPanel'
 
 function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
   switch (activePanel) {
-    case 'principles': return <PrinciplesPanel />
-    case 'contact': return <ContactPanel />
+    case 'overview': return <OverviewPanel navigate={navigate} />
     case 'wealth': return <WealthPanel navigate={navigate} />
     case 'derma': return <DermaPanel />
-    default: return (
-      <div style={{ padding: '40px', fontFamily: 'var(--font-ui)' }}>
-        <p>Active panel: <strong>{activePanel}</strong></p>
-      </div>
-    )
+    case 'principles': return <PrinciplesPanel />
+    case 'contact': return <ContactPanel />
   }
 }
 
