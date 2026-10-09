@@ -1,0 +1,104 @@
+.derma-panel {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 42fr 58fr;
+}
+
+.derma-panel__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding: 56px 48px 56px 64px;
+  background: var(--color-canvas);
+}
+
+.derma-panel__eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.derma-panel__heading {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-ink);
+}
+
+.derma-panel__heading em {
+  font-style: italic;
+  color: var(--color-derma-accent);
+}
+
+.derma-panel__desc {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-muted);
+  max-width: 360px;
+}
+
+.derma-panel__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.derma-panel__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 14px 24px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  border-radius: 6px;
+  width: fit-content;
+  transition: border-color 150ms, background 150ms;
+}
+
+.derma-panel__cta:hover {
+  border-color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
+}
+
+.derma-panel__cta:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+.derma-panel__cta-icon { width: 14px; height: 14px; }
+
+.derma-panel__trust {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-muted);
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+.derma-panel__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-derma-bg);
+  padding: 56px 64px 56px 48px;
+}
+
+@media (max-width: 1024px) {
+  .derma-panel { grid-template-columns: 1fr; }
+  .derma-panel__visual { display: none; }
+  .derma-panel__copy { padding: 40px 32px; min-height: 100%; }
+}
+
+@media (max-width: 767px) {
+  .derma-panel__copy { padding: 32px 20px; gap: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .derma-panel__cta { transition: none; }
+}

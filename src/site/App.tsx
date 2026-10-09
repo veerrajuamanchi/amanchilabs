@@ -5,6 +5,7 @@ import { PanelShell } from './components/PanelShell'
 import { PrinciplesPanel } from './panels/PrinciplesPanel'
 import { ContactPanel } from './panels/ContactPanel'
 import { WealthPanel } from './panels/WealthPanel'
+import { DermaPanel } from './panels/DermaPanel'
 import type { PanelId } from './hooks/useHashRouter'
 
 function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
@@ -12,6 +13,7 @@ function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
     case 'principles': return <PrinciplesPanel />
     case 'contact': return <ContactPanel />
     case 'wealth': return <WealthPanel navigate={navigate} />
+    case 'derma': return <DermaPanel />
     default: return (
       <div style={{ padding: '40px', fontFamily: 'var(--font-ui)' }}>
         <p>Active panel: <strong>{activePanel}</strong></p>

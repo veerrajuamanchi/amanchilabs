@@ -11,7 +11,7 @@ const ROUTINE_STEPS = [
 export function RoutinePhone() {
   return (
     <div className="routine-phone">
-      <div className="routine-phone__shell" aria-label="Illustrative DermaPrivate routine interface">
+      <div className="routine-phone__shell" role="img" aria-label="Illustrative DermaPrivate morning routine interface">
         <div className="routine-phone__screen">
           <div className="routine-phone__topbar">
             <span className="routine-phone__wordmark">derma<em>private</em></span>
