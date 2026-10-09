@@ -1,0 +1,68 @@
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  background: var(--color-canvas);
+  border-right: 1px solid var(--color-line);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.sidebar__brand {
+  padding: 28px 24px 32px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.sidebar__brand .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.sidebar__brand .brand:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; }
+.sidebar__brand .brand-mark { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.sidebar__brand .brand-space { white-space: pre; }
+
+.sidebar__nav {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar__links {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__foot {
+  padding: 20px 0 24px;
+  border-top: 1px solid var(--color-line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar__contact { font-size: 13px; }
+.sidebar__mail-icon { width: 16px; height: 16px; flex-shrink: 0; }
+.sidebar__copy {
+  padding: 0 24px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+@media (max-width: 767px) {
+  .sidebar { display: none; }
+}
