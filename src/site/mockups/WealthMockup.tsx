@@ -10,8 +10,8 @@ const DOCUMENT_TYPES = [
 
 export function WealthMockup() {
   return (
-    <div className="wealth-mockup">
-      <div className="wealth-mockup__chrome" aria-label="Illustrative WealthPrivate document interface">
+    <div className="wealth-mockup" role="img" aria-label="Illustrative WealthPrivate document interface">
+      <div className="wealth-mockup__chrome">
         <div className="wealth-mockup__header">
           <span className="wealth-mockup__app-name">WealthPrivate</span>
           <span className="wealth-mockup__header-mark" aria-hidden="true" />
