@@ -32,7 +32,7 @@
 
 .derma-panel__heading em {
   font-style: italic;
-  color: var(--color-derma-accent);
+  color: var(--color-derma-heading);
 }
 
 .derma-panel__desc {
