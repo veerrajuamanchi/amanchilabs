@@ -2,6 +2,19 @@ import { useHashRouter } from './hooks/useHashRouter'
 import { Sidebar } from './components/Sidebar'
 import { MobileNav } from './components/MobileNav'
 import { PanelShell } from './components/PanelShell'
+import { PrinciplesPanel } from './panels/PrinciplesPanel'
+import type { PanelId } from './hooks/useHashRouter'
+
+function renderPanel(activePanel: PanelId) {
+  switch (activePanel) {
+    case 'principles': return <PrinciplesPanel />
+    default: return (
+      <div style={{ padding: '40px', fontFamily: 'var(--font-ui)' }}>
+        <p>Active panel: <strong>{activePanel}</strong></p>
+      </div>
+    )
+  }
+}
 
 export default function App() {
   const { activePanel, navigate } = useHashRouter()
@@ -10,9 +23,7 @@ export default function App() {
       <Sidebar activePanel={activePanel} navigate={navigate} />
       <MobileNav activePanel={activePanel} navigate={navigate} />
       <PanelShell activePanel={activePanel}>
-        <div style={{ padding: '40px', fontFamily: 'var(--font-ui)' }}>
-          <p>Active panel: <strong>{activePanel}</strong></p>
-        </div>
+        {renderPanel(activePanel)}
       </PanelShell>
     </>
   )
