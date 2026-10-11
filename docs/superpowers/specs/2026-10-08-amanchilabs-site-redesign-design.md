@@ -1,9 +1,66 @@
 # Amanchi Labs Site Redesign — Design Spec
-**Date:** 2026-10-08 (revised 2026-10-09, final refinements 2026-10-09)  
-**Status:** Approved for implementation planning  
+**Date:** 2026-10-08 (revised 2026-10-10 after screenshot approval)
+
+**Status:** Option A layouts and scoped local implementation plan approved; implemented locally, final review and publication authorization pending
 **Project:** amanchilabs.com — full visual and structural redesign
 
+## Approved Overview And Products Revision (2026-10-10)
+
+This revision supersedes conflicting earlier Overview, navigation, component, and scroll requirements. The existing product, Principles, and Contact panel designs remain unchanged. Production implementation is not authorized until the new implementation plan is approved. Merge, push, and deployment require separate authorization.
+
+**Approved visual baselines:** revised Sequential Editorial Overview and two-product Products view, desktop and mobile:
+
+- [Desktop Overview](../../reviews/a-revised-1440x900-full.png)
+- [Mobile Overview](../../reviews/a-revised-375x812-full.png)
+- [Desktop Products](../../reviews/products-revised-1440x900-full.png)
+- [Mobile Products](../../reviews/products-revised-375x812-full.png)
+- [Review prototype](../../reviews/overview-concepts.html) is a visual reference, not production architecture.
+
+**Final approved refinements:** add Products to navigation; use the customer-facing Products disclosure specified below; clarify the diagram explanation as a design intention. These three refinements are approved text/navigation changes to the screenshot baselines, not permission for another redesign.
+
+**Navigation:** four un-nested primary destinations in this order: Overview, Products, Principles, Contact. Contact retains its desktop footer position and icon. WealthPrivate and DermaPrivate remain full individual panels, discoverable through Products and their existing direct hashes. Do not add speculative products, nested menus, or duplicate top-level product entries.
+
+**Routes:** `/#overview`, `/#products`, `/#wealth`, `/#derma`, `/#principles`, `/#contact`. The primary menu has four entries; the application has six valid panel routes. On individual product routes, style Products as the portfolio parent context but do not mark its link `aria-current="page"` because that exact route is not current. Provide product-page context through the existing heading and retain access to Products through navigation.
+
+**Layout:** normal content-sized rows within the existing scrollable canvas. Overview intentionally scrolls on desktop and mobile; hero, supporting message, and primary action must fit in the initial requested desktop viewports at normal zoom. Products should fit naturally at 1440x900 and 1280x800 without artificial stretching; allow graceful scrolling at shorter heights, narrow widths, and zoom. Do not use fixed content heights, viewport-bottom card anchoring, or viewport-centered hero content. Keep 240px sidebar at widths of at least 1024px and the existing 56px top navigation below 1024px. Preserve approved mobile composition rather than its historical content height.
+
+**Brand:** retain Instrument Serif, Inter, warm off-white, charcoal, restrained sage, and the existing wordmark, icons, focus styling, and reduced-motion behavior.
+
+### Approved Overview Content
+
+1. **Company vision:** eyebrow `AMANCHI LABS`; headline `Your life is personal. Your technology should respect that.`
+2. **Belief:** `We believe useful software shouldn't require you to surrender control of your personal information.`
+3. **Company positioning:** `Amanchi Labs builds thoughtful, local-first applications designed to keep more of your information on your own device — and put you in charge of what you choose to share.` This expresses design direction, not independently verified behavior of all products.
+4. **Primary action:** `Explore our philosophy` opens `/#principles`.
+5. **Distinct brand layers:** `Private by Design. Local by Default.` and `Your Data. Your Device. Your Control.` Preserve the nearby design-intention framing; neither is a security guarantee.
+6. **Privacy problem:** `Your life is not a dataset.` Explain briefly that records, conversations, routines, and documents are parts of life, and using an app should not automatically turn them into another company's stored asset. Recognize connected-service benefits, increased exposure from unnecessary collection, breach notifications, and local security risks without fear-based messaging.
+7. **Approach:** `Useful software. Less unnecessary exposure.` Present the remaining three ideas in a sequential editorial list: `Not everything needs the cloud.`, `Intelligence without unnecessary exposure.`, `Your information remains yours.` Local processing, optional transparent user-initiated AI, and control over access, retention, sharing, export, and deletion are design intentions. Retain the explicit intention framing from the approved prototype; do not present export or deletion as universally shipped capabilities.
+8. **Architecture:** `Your information. Your decision.` Three prominent stages: You / Choose your information; Your device / Local storage and processing; Optional AI / Selected information, with permission / External provider. A solid local path and a dashed permission-dependent external transfer distinguish the normal workflow from an optional request. Mobile stacks these stages. Provide an equivalent accessible text description; do not rely on color or arrows alone.
+9. **Final diagram explanation:** `Our design intention: your information remains on your device by default. When you choose to use an external AI feature, selected information may be sent to the provider. You should always know what is being shared and why.` Follow with `Illustrative design philosophy, not a verified representation of every Amanchi Labs product. Other transfers, including backups, integrations, or telemetry, vary by product.`
+10. **Discovery:** `One philosophy. A family of personal applications.` Briefly envision tools for finances, personal routines, documents, and everyday life without naming or promising speculative applications. `Explore our products` opens `/#products`, never a same-page scroll or direct WealthPrivate redirect.
+
+### Approved Products Content
+
+- Eyebrow `AMANCHI LABS / PRODUCTS`; headline `Personal applications. A shared philosophy.`
+- Supporting copy: `Explore the applications we're building for financial information and personal routines.`
+- Equal-prominence two-column desktop presentation; single-column mobile; preserve approved spacing and typography. No Overview product cards or additional product mockups are required.
+- WealthPrivate: `IN DEVELOPMENT`; development-oriented description; `Discover WealthPrivate` opens `/#wealth`.
+- DermaPrivate: skincare/personal-routines description; no unverified availability badge; `Discover DermaPrivate` opens `/#derma`.
+- Use the approved prototype's short product descriptions, not the older claim-heavy trust attributes from `products.ts`.
+- Replace the engineering-style warning with: `Each Amanchi Labs application is designed with privacy in mind. Features and data-handling practices vary by product; explore each application to learn how it works.`
+- `Back to Overview` opens `/#overview`.
+
+### Claim Verification And Approval Gates
+
+The website and mockups are not evidence of product data handling. Before publishing any product-specific assertion, independently inspect the actual product implementation and document product, platform, release/commit, workflow, evidence, limitations, and reviewer. Verify storage, optional AI payloads/consent/provider policies, encryption, integrations, logs/telemetry, backup/sync, accounts, retention, export, deletion, and user controls. Do not claim offline operation, unnecessary accounts, one-time purchases, AI masking, or zero server storage without evidence. Keep the detailed checklist in development documentation rather than public UI.
+
+Existing product-page claims must be audited as well as new copy. Preserve product-page layout and working links; any required correction to their copy must be documented and approved before editing those panels. Missing product repositories or workflow evidence blocks claim sign-off and publication, not documentation planning. Do not infer verification from current marketing copy or a live landing page.
+
+**Acceptance:** compare production implementation against the four approved screenshot baselines and final refinements at 1440x900, 1280x800, 1024x768, and 375x812; additionally check tablet transition, short heights, actual browser zoom 125%/200%, keyboard/drawer focus, all six hashes, Back/Forward, fonts/assets, reduced motion, no clipped content or horizontal overflow, and existing product/contact links. CSS zoom stress tests already performed on mockups do not replace actual browser-zoom verification. Build and TypeScript must pass; add a focused frontend regression suite because none currently exists. Final implementation review and publication authorization remain separate gates.
+
 ## Final Pre-Implementation Refinements (Approved 2026-10-09)
+
+Historical refinements below remain applicable except where superseded by the 2026-10-10 revision: the Overview CTA now targets Products, and Overview is intentionally scrollable.
 
 These four requirements are additions to the approved spec and must be reflected in the implementation plan:
 
@@ -63,7 +120,7 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Principle | Directive |
 |---|---|
-| **One screen. One message. One action.** | Each panel is self-contained in a single viewport at standard desktop sizes. Scrolling is allowed as a graceful fallback on smaller screens and when browser zoom exceeds 100%, but should never be required on a ≥1280px viewport at 100% zoom. |
+| **Clear narrative. Meaningful action.** | Overview uses the approved sequential scrollable narrative. Products is content-sized with graceful scroll fallback. Preserve the existing other-panel composition; never clip content to meet a single-screen target. |
 | **Light editorial + dark premium hybrid** | Warm off-white foundation. Product panels are dark and immersive. |
 | **Typography-first** | Strong type hierarchy does the heavy lifting. Copy is minimal, confident, and specific. |
 | **Honest representation** | No fabricated product data, financial figures, health scores, or performance claims. Conceptual UI mockups must be clearly labeled as illustrative. |
@@ -119,10 +176,9 @@ The site must feel like a world-class software studio — light editorial founda
 
 1. **Studio Brand** — `AMANCHI LABS` wordmark + geometric mark. Generous top padding. Not a link (clicking logo navigates to Overview).
 2. **Primary Navigation** — vertical stack with generous spacing and clear active-state indicator:
-   - Overview
-   - WealthPrivate
-   - DermaPrivate
-   - Principles
+  - Overview
+  - Products
+  - Principles
 3. **Contact** — pinned near bottom with a subtle mail icon, discreet typographic treatment.
 4. **Footer micro-copy** — `© 2026 Amanchi Labs` at very bottom in smallest possible weight.
 
@@ -142,8 +198,8 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Concern | Solution |
 |---|---|
-| **URL state** | Hash routing: `/#overview`, `/#wealth`, `/#derma`, `/#principles`, `/#contact` |
-| **Browser history** | `history.pushState` on panel switch — back/forward work naturally |
+| **URL state** | Hash routing: `/#overview`, `/#products`, `/#wealth`, `/#derma`, `/#principles`, `/#contact` |
+| **Browser history** | Set `window.location.hash`; `hashchange` drives panel state and Back/Forward. Never use `history.pushState` for panel navigation. |
 | **Direct links** | Sharing `/#wealth` opens directly to WealthPrivate panel |
 | **Keyboard navigation** | Tab order: sidebar links → canvas content. Arrow keys cycle sidebar items. |
 | **Transitions** | Crossfade (`opacity` 150–200ms ease-in-out). No sliding. No page reload. |
@@ -155,6 +211,8 @@ The site must feel like a world-class software studio — light editorial founda
 ## 6. Panel Specifications
 
 ### 6.1 Overview Panel (Default / Home)
+
+**Superseded historical design:** the product-card composition below is retained for context only. Implement the Approved Overview Content and layout at the top of this specification instead.
 
 **URL:** `/#overview`  
 **Background:** Warm off-white (continuous with sidebar)  
@@ -339,9 +397,9 @@ The site must feel like a world-class software studio — light editorial founda
 
 | Breakpoint | Behavior |
 |---|---|
-| `≥ 1280px` | Full desktop: 240px sidebar + canvas. No forced scroll on standard panels. |
-| `1024px – 1279px` | Sidebar at 220px. Canvas panels may scroll if needed. |
-| `768px – 1023px` | Sidebar collapses; icon rail (48px) or top hamburger menu. Canvas fills. Scroll permitted. |
+| `≥ 1280px` | Full desktop: existing 240px sidebar + canvas. Overview intentionally scrolls; Products scrolls only when content needs it. |
+| `1024px – 1279px` | Retain existing 240px sidebar. Canvas panels may scroll as needed. |
+| `768px – 1023px` | Existing 56px top bar and hamburger drawer. Canvas fills remaining height. Scroll permitted. |
 | `< 768px` | Top bar: studio name left, menu button right. Overlay drawer for nav. Panels scroll freely. |
 
 ---
@@ -353,12 +411,13 @@ The site must feel like a world-class software studio — light editorial founda
 | Hash | Panel |
 |---|---|
 | `/#overview` | Overview (default) |
+| `/#products` | Products (portfolio discovery) |
 | `/#wealth` | WealthPrivate |
 | `/#derma` | DermaPrivate |
 | `/#principles` | Principles |
 | `/#contact` | Contact |
 
-On load: read `window.location.hash` → set initial active panel. On nav click: update hash via `history.pushState`. Listen for `hashchange` for back/forward support.
+On load: read `window.location.hash` → set initial active panel. On nav click: set `window.location.hash`. Listen for `hashchange` for all navigation, including back/forward. Preserve the existing empty/invalid hash fallback to Overview.
 
 ---
 
@@ -384,8 +443,8 @@ These are non-negotiable requirements that must be verified before any panel shi
 | `Sidebar` | Fixed nav: brand mark + nav items + contact link + copyright |
 | `NavItem` | Sidebar item with active indicator bar |
 | `PanelShell` | Full-screen canvas wrapper with crossfade transition logic |
-| `OverviewPanel` | Studio headline + two side-by-side product cards |
-| `ProductCard` | Card component used in Overview (dark + light variants) |
+| `OverviewPanel` | Approved sequential company narrative and conceptual ownership diagram |
+| `ProductsPanel` | Approved two-product discovery layout; links to individual panels |
 | `WealthPanel` | Split-canvas WealthPrivate panel |
 | `DermaPanel` | Split-canvas DermaPrivate panel |
 | `PrinciplesPanel` | Principles editorial panel |
@@ -422,7 +481,7 @@ These are non-negotiable requirements that must be verified before any panel shi
 | DermaPrivate visuals | Actual product UI where available; abstract + labeled otherwise |
 | Contact panel | Dark charcoal `#141414` background — evaluate visually before final ship |
 | Reference image | Conceptual reference only — architecture, scenic photo, and fabricated data not adopted |
-| Scroll policy | No forced scroll on ≥1280px; graceful scroll fallback for smaller screens and zoom |
+| Scroll policy | Overview intentionally scrolls; Products and other panels use graceful content-driven fallback without clipping |
 | WealthPrivate CTA | `"Get in touch →"` → `founder@amanchilabs.com` (no fake waitlist) |
 | Status language | `IN DEVELOPMENT` for WealthPrivate; verified actual status for DermaPrivate |
 
@@ -435,7 +494,7 @@ A viewer landing on the site must be able to:
 1. Understand what Amanchi Labs does in **< 5 seconds** on the Overview panel.
 2. Navigate to WealthPrivate or DermaPrivate and understand each product in **< 5 seconds**.
 3. Find both contact email addresses without any searching.
-4. Experience **zero forced scrolling** on a ≥1280px desktop viewport at 100% zoom.
+4. See the Overview mission and primary action in the initial desktop viewport; scroll its narrative naturally without clipping or artificially bottom-aligned content.
 5. Use the site fully on a **375px mobile screen**.
 6. Navigate entirely via **keyboard**.
 7. Share a **direct URL** to a specific product panel and land on it correctly.

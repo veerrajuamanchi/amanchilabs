@@ -1,5 +1,7 @@
 # Amanchi Labs Site Redesign — Implementation Plan
 
+**Historical plan:** foundation work and the former five-panel product-card Overview. Do not execute this plan for the approved 2026-10-10 revision. Its sub-skill, automatic-commit, foundation-replacement, and no-scroll instructions are not current authorization. Use [the new Overview and Products implementation plan](2026-10-10-overview-products.md), which remains pending review. No production changes, commits, merge, push, or deployment are authorized by either document alone.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the current long-scroll `amanchilabs.com` site with a premium app-style experience: fixed left sidebar (220–240px) + full-screen viewport-contained right canvas panels, with five panels (Overview, WealthPrivate, DermaPrivate, Principles, Contact), client-side hash routing, and a light-editorial + dark-product visual identity.

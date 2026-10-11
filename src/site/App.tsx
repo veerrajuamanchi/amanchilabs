@@ -3,6 +3,7 @@ import { Sidebar } from './components/Sidebar'
 import { MobileNav } from './components/MobileNav'
 import { PanelShell } from './components/PanelShell'
 import { OverviewPanel } from './panels/OverviewPanel'
+import { ProductsPanel } from './panels/ProductsPanel'
 import { WealthPanel } from './panels/WealthPanel'
 import { DermaPanel } from './panels/DermaPanel'
 import { PrinciplesPanel } from './panels/PrinciplesPanel'
@@ -11,6 +12,7 @@ import { ContactPanel } from './panels/ContactPanel'
 function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
   switch (activePanel) {
     case 'overview': return <OverviewPanel navigate={navigate} />
+    case 'products': return <ProductsPanel navigate={navigate} />
     case 'wealth': return <WealthPanel navigate={navigate} />
     case 'derma': return <DermaPanel />
     case 'principles': return <PrinciplesPanel />

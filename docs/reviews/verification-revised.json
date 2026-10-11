@@ -1,0 +1,117 @@
+{
+  "results": [
+    {
+      "view": "a",
+      "viewport": [
+        1440,
+        900
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 92.5,
+      "actionBottom": 459.359375
+    },
+    {
+      "view": "a",
+      "viewport": [
+        1280,
+        800
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 86.5,
+      "actionBottom": 453.359375
+    },
+    {
+      "view": "a",
+      "viewport": [
+        1024,
+        768
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 84.578125,
+      "actionBottom": 426.5
+    },
+    {
+      "view": "a",
+      "viewport": [
+        375,
+        812
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 140.5,
+      "actionBottom": 545.75
+    },
+    {
+      "view": "products",
+      "viewport": [
+        1440,
+        900
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 92.5,
+      "actionBottom": 603.53125
+    },
+    {
+      "view": "products",
+      "viewport": [
+        1280,
+        800
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 86.5,
+      "actionBottom": 597.53125
+    },
+    {
+      "view": "products",
+      "viewport": [
+        1024,
+        768
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 84.578125,
+      "actionBottom": 595.859375
+    },
+    {
+      "view": "products",
+      "viewport": [
+        375,
+        812
+      ],
+      "overflow": false,
+      "fonts": [
+        true,
+        true
+      ],
+      "heroTop": 140.5,
+      "actionBottom": 622.625
+    }
+  ],
+  "errors": []
+}

@@ -1,6 +1,6 @@
 # Amanchi Labs
 
-The Amanchi Labs company website is a responsive, single-page React and TypeScript site built with Vite. Product entries live separately from the presentation in `src/site/products.ts`; the current featured product is DermaPrivate.
+The Amanchi Labs company website is a responsive React and TypeScript site built with Vite. Primary navigation is Overview, Products, Principles, and Contact. The Products panel presents WealthPrivate and DermaPrivate; their individual panels remain accessible at `/#wealth` and `/#derma`. All six panels use native hash routing.
 
 ## Local development
 
@@ -18,6 +18,23 @@ npm run build
 npm run preview
 ```
 
+## Browser regression checks
+
+One focused Playwright suite covers routing, history, keyboard navigation, the mobile drawer, responsive layouts, fonts, and real browser zoom. Install Chromium once, then run:
+
+```sh
+npx playwright install chromium
+npm run test:e2e
+```
+
+To use an existing Google Chrome installation instead:
+
+```sh
+PLAYWRIGHT_CHANNEL=chrome npm run test:e2e
+```
+
+To check a running production preview, set `SITE_TEST_URL` to its URL. Without that variable, the test config starts Vite on port 5174. Screenshots and traces in `test-results` are ignored.
+
 ## Deployment
 
 The site is static and can be deployed to Render Static Sites, Vercel, Netlify, or GitHub Pages. On Render, create a Static Site connected to the repository and use the settings below.
@@ -29,6 +46,6 @@ For GitHub Pages, configure the Pages workflow to install dependencies, run `npm
 
 ## Updating the portfolio
 
-Add product records in `src/site/products.ts`. The `Product` type includes name, category, description, status, URL, accent, and featured fields. Keep public product claims and availability accurate when adding a product.
+Public discovery copy lives in `src/site/panels/ProductsPanel.tsx`. Only WealthPrivate and DermaPrivate are featured. Do not advertise speculative products or infer privacy capabilities from marketing copy. Product implementation evidence and publication approval remain required; see `docs/reviews/product-claim-verification.md`.
 
-The contact address is currently configured as `hello@amanchilabs.com` in `src/site/App.tsx`; update both mail links there to the address the studio monitors before launch. The Privacy footer link points to the studio's privacy principles. The Terms link opens a terms inquiry email until formal terms are published.
+The Contact panel links to `founder@amanchilabs.com` and `support@amanchilabs.com`. Local implementation approval does not authorize merge, push, or deployment.

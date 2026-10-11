@@ -7,8 +7,7 @@ type Props = { activePanel: PanelId; navigate: (panel: PanelId) => void }
 
 const NAV_ITEMS: { id: PanelId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
-  { id: 'wealth', label: 'WealthPrivate' },
-  { id: 'derma', label: 'DermaPrivate' },
+  { id: 'products', label: 'Products' },
   { id: 'principles', label: 'Principles' },
   { id: 'contact', label: 'Contact' },
 ]

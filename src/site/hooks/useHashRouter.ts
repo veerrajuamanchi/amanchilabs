@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 
-export type PanelId = 'overview' | 'wealth' | 'derma' | 'principles' | 'contact'
+export type PanelId = 'overview' | 'products' | 'wealth' | 'derma' | 'principles' | 'contact'
 
-const VALID_PANELS: readonly PanelId[] = ['overview', 'wealth', 'derma', 'principles', 'contact']
+const VALID_PANELS: readonly PanelId[] = ['overview', 'products', 'wealth', 'derma', 'principles', 'contact']
 
 function parsePanelFromHash(hash: string): PanelId {
   const raw = hash.replace(/^#/, '')
