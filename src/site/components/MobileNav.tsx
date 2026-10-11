@@ -7,10 +7,8 @@ import './MobileNav.css'
 type Props = { activePanel: PanelId; navigate: (panel: PanelId) => void }
 
 const NAV_ITEMS: { id: PanelId; label: string }[] = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'products', label: 'Products' },
-  { id: 'principles', label: 'Principles' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'wealth', label: 'WealthPrivate' },
+  { id: 'derma', label: 'DermaPrivate' },
 ]
 
 export function MobileNav({ activePanel, navigate }: Props) {
@@ -83,7 +81,7 @@ export function MobileNav({ activePanel, navigate }: Props) {
           ref={toggleRef}
           className="mobile-nav__toggle"
           type="button"
-          aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-label={open ? 'Close applications menu' : 'Open applications menu'}
           aria-expanded={open}
           aria-controls="mobile-drawer"
           onClick={() => setOpen(value => !value)}
@@ -101,7 +99,7 @@ export function MobileNav({ activePanel, navigate }: Props) {
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <nav aria-label="Primary navigation">
+          <nav aria-label="Applications">
             {NAV_ITEMS.map(({ id, label }) => (
               <a
                 key={id}

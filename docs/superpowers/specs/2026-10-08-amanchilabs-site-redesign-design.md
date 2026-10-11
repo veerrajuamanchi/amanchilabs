@@ -1,4 +1,14 @@
 # Amanchi Labs Site Redesign — Design Spec
+
+## Active Switchable Color Design (2026-10-11)
+
+The owner requested integration of the approved mockup into the actual application and removal of the old design. This revision supersedes the stacked Overview and separate legacy panel layouts described below. The single production presentation is CompanyView: persistent introduction, links above the headline (Our Vision, Why It Matters, Our Approach, Principles, Products, Contact), one selected view, and a shared live-text signature. Product introductions also use this header/footer; both app content areas are charcoal with slate WealthPrivate and sage DermaPrivate accents. DermaPrivate is IN TESTING; WealthPrivate is IN DEVELOPMENT. The mobile hamburger offers only application shortcuts.
+
+Native routes remain compatible: #overview defaults to Our Vision; #overview/vision is an alias; #overview/why and #overview/approach switch content, not scroll to stacked sections. #principles, #products, #contact, #wealth and #derma select dedicated content under the same header. Products returns to Our Vision. The forward sequence is Vision -> Why -> Approach -> Principles -> Products. External DermaPrivate and founder/support targets are preserved; no speculative WealthPrivate site URL.
+
+Company palettes are forest for philosophy, teal for Approach, neutral slate for Products, charcoal Contact and apps. A single shared text signature scrolls with selected content. One-screen desktop fit is a goal with graceful content scrolling on mobile/short heights/zoom. Shorter desktop spacing is tightened to preserve content rather than clipping. Focus transfers to selected headings without scrollIntoView; status announcements and reduced-motion support are retained.
+
+Legacy React panels, unused PanelShell/mockups/helpers and stale product metadata have been removed. Review HTML remains historical documentation only. Current results: [switchable implementation report](../../reviews/2026-10-11-switchable-implementation.md). No publication, commit, push, or deployment is authorized by this record alone.
 **Date:** 2026-10-08 (revised 2026-10-10 after screenshot approval)
 
 **Status:** Option A layouts and scoped local implementation plan approved; implemented locally, final review and publication authorization pending
