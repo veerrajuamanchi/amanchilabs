@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent, SyntheticEvent } from 'react'
 import type { PanelId } from '../hooks/useHashRouter'
+import { Brand } from '../Brand'
 import './MobileNav.css'
 
 type Props = { activePanel: PanelId; navigate: (panel: PanelId) => void }
@@ -77,7 +78,7 @@ export function MobileNav({ activePanel, navigate }: Props) {
   return (
     <>
       <header className="mobile-nav">
-        <span className="mobile-nav__brand">AMANCHI LABS</span>
+        <span className="mobile-nav__brand"><Brand /></span>
         <button
           ref={toggleRef}
           className="mobile-nav__toggle"
@@ -95,7 +96,7 @@ export function MobileNav({ activePanel, navigate }: Props) {
       {open && (
         <div ref={drawerRef} className="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu" aria-modal="true">
           <div className="mobile-drawer__header">
-            <span className="mobile-nav__brand">AMANCHI LABS</span>
+            <span className="mobile-nav__brand"><Brand onClick={() => setOpen(false)} /></span>
             <button className="mobile-drawer__close" type="button" aria-label="Close navigation menu" onClick={() => setOpen(false)}>
               <span aria-hidden="true">×</span>
             </button>

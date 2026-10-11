@@ -1,3 +1,4 @@
+import { Brand } from '../Brand'
 import './ContactPanel.css'
 
 export function ContactPanel() {
@@ -29,7 +30,11 @@ export function ContactPanel() {
             <span className="contact-panel__link-email">support@amanchilabs.com</span>
           </a>
         </div>
-        <p className="contact-panel__foot">© 2026 Amanchi Labs · Independent product studio</p>
+        <footer className="contact-panel__foot">
+          <Brand footer />
+          <p>© 2026 Amanchi Labs · Independent product studio</p>
+          <a className="contact-panel__privacy" href="/privacy.html">Website privacy notice</a>
+        </footer>
       </div>
     </section>
   )

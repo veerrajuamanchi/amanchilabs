@@ -1,0 +1,318 @@
+{
+  "originals": [
+    {
+      "filename": "Amanchi_Labs_Logo.png",
+      "width": 1983,
+      "height": 793,
+      "format": "png",
+      "bytes": 1095243,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        253,
+        251,
+        248,
+        255
+      ],
+      "sha256": "94f196083f92f11af0216c95e30fbc0b33749aa63d43971f28555eedf99caa04",
+      "usage": "Complete horizontal master; opaque off-white, fine tagline. Preserve; not readable as-is at sidebar size."
+    },
+    {
+      "filename": "Amanchi_Labs_Stacked_Vertical_Logo.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 546418,
+      "hasAlpha": true,
+      "transparentPixels": 1245558,
+      "partialAlphaPixels": 324735,
+      "cornerRGBA": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "sha256": "6bb17c8d196563d26e25b26adcab7158ecd12c5e2c053b4fd80a996bfeb5ad68",
+      "usage": "Transparent stacked artwork; isolate symbol for compact derivatives. Full stacked version for presentations."
+    },
+    {
+      "filename": "Amanchi_Labs_Wordmark_Name_Only.png",
+      "width": 2172,
+      "height": 724,
+      "format": "png",
+      "bytes": 273095,
+      "hasAlpha": true,
+      "transparentPixels": 1437966,
+      "partialAlphaPixels": 130356,
+      "cornerRGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "9235ef1e8790fedab07d6d9ef72a5665827529d2c5b362602a07e558ec0d8f7e",
+      "usage": "Transparent dark serif wordmark; trim empty canvas and use in compact lockup."
+    },
+    {
+      "filename": "Amanchi_Labs_Footer_Logo.png",
+      "width": 2172,
+      "height": 724,
+      "format": "png",
+      "bytes": 1033204,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        253,
+        252,
+        250,
+        255
+      ],
+      "sha256": "559c30777b29585e1953858d7d98e459c65839282d9ab27b21258a3fd1dbc899",
+      "usage": "Opaque off-white footer artwork with copyright and dark type. Reference only; use high-contrast compact derivative on charcoal."
+    },
+    {
+      "filename": "Amanchi_Labs_Favicon.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "png",
+      "bytes": 1185390,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        252,
+        251,
+        249,
+        255
+      ],
+      "sha256": "630063e34d1801f842bb0bea7cb67ddea0ea20572293dd77b5922dc37b0719ad",
+      "usage": "Opaque presentation sheet with size labels; never publish whole sheet as a favicon."
+    },
+    {
+      "filename": "Amanchi_Labs_Favicon_16px.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1008101,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        253,
+        255,
+        254,
+        255
+      ],
+      "sha256": "6b63c246d3355f1129270547f06b6f0769a8dcdb98ae16521fcd6fed9ea97391",
+      "usage": "Opaque symbol on large near-white canvas; reference for small-size visual checks, not a true 16px export."
+    },
+    {
+      "filename": "Amanchi_Labs_Apple_Touch_Icon.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1433145,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        254,
+        255,
+        254,
+        255
+      ],
+      "sha256": "95deaad87916a139aa3760380c754b435d32d3ab2ed1293e7d7b8a50543c07df",
+      "usage": "Opaque rounded-square illustration and shadow; reference only. Production tile derives from isolated approved symbol."
+    },
+    {
+      "filename": "Amanchi_Labs_PWA_Icon_192_×_192.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1525049,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        255,
+        255,
+        254,
+        255
+      ],
+      "sha256": "b08d577510fdf7203698dd77f7851e97dbc9bf177e7396d27c6f835e9f990ac3",
+      "usage": "Opaque tile with name/tagline; too detailed at small sizes. Retain for reference; use symbol-only derivative."
+    },
+    {
+      "filename": "Amanchi_Labs_PWA_Icon_512_×_512.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1503820,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        254,
+        255,
+        254,
+        255
+      ],
+      "sha256": "651725dd014a6aa0ecd66bb8c4c034964a05a6a33aa483ec3d54f08cd1e6d0c2",
+      "usage": "Opaque tile with name/tagline and decorative lighting. Retain for reference; use symbol-only derivative."
+    },
+    {
+      "filename": "Amanchi_Labs_Social_Sharing_Image.png",
+      "width": 1733,
+      "height": 907,
+      "format": "png",
+      "bytes": 1832574,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        218,
+        221,
+        221,
+        255
+      ],
+      "sha256": "7395fbb9d055be9ce19af48832dbbe89109f841638747433872420fb19982f3e",
+      "usage": "Scenic branded social artwork; resize to 1200x630. Not used as website hero imagery."
+    },
+    {
+      "filename": "Amanchi_Labs_Square_Social_Profile_Avatar.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1553356,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        243,
+        241,
+        235,
+        255
+      ],
+      "sha256": "70712163f87593d76b551cb7db972cb9e3596b02a242b3039b77d151b6ce2381",
+      "usage": "Opaque stacked logo on light background; future social profile artwork, not live website UI."
+    },
+    {
+      "filename": "Amanchi_Labs_Email_Signature_Logo.png",
+      "width": 2172,
+      "height": 724,
+      "format": "png",
+      "bytes": 265457,
+      "hasAlpha": true,
+      "transparentPixels": 1466271,
+      "partialAlphaPixels": 103304,
+      "cornerRGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "9513b106dec00ab03b601ced22d873a383037949405676d901fe963a963471be",
+      "usage": "Transparent horizontal full lockup with fine tagline; future email signature reference."
+    },
+    {
+      "filename": "Amanchi_Labs_Native_App_Icon_ArtWork.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "bytes": 1693819,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "cornerRGBA": [
+        253,
+        253,
+        255,
+        255
+      ],
+      "sha256": "7371ba1a12fc8625105cbec0452715f309be2a76d2f7682144ee683358cb3ae8",
+      "usage": "Opaque rounded-square native artwork and shadows; future reference, not a change to individual app icons."
+    }
+  ],
+  "derivatives": [
+    {
+      "filename": "apple-touch-icon.png",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true,
+      "bytes": 13928,
+      "format": "png"
+    },
+    {
+      "filename": "brandmark.png",
+      "width": 512,
+      "height": 337,
+      "hasAlpha": true,
+      "bytes": 147421,
+      "format": "png"
+    },
+    {
+      "filename": "favicon-16x16.png",
+      "width": 16,
+      "height": 16,
+      "hasAlpha": true,
+      "bytes": 493,
+      "format": "png"
+    },
+    {
+      "filename": "favicon-32x32.png",
+      "width": 32,
+      "height": 32,
+      "hasAlpha": true,
+      "bytes": 1402,
+      "format": "png"
+    },
+    {
+      "filename": "favicon.ico",
+      "bytes": 1933,
+      "format": "ico",
+      "dimensions": "16x16 and 32x32 PNG entries"
+    },
+    {
+      "filename": "logo-footer.png",
+      "width": 640,
+      "height": 100,
+      "hasAlpha": true,
+      "bytes": 13596,
+      "format": "png"
+    },
+    {
+      "filename": "logo-header.png",
+      "width": 640,
+      "height": 100,
+      "hasAlpha": true,
+      "bytes": 32007,
+      "format": "png"
+    },
+    {
+      "filename": "og-image.png",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false,
+      "bytes": 275966,
+      "format": "png"
+    },
+    {
+      "filename": "pwa-192x192.png",
+      "width": 192,
+      "height": 192,
+      "hasAlpha": true,
+      "bytes": 15422,
+      "format": "png"
+    },
+    {
+      "filename": "pwa-512x512.png",
+      "width": 512,
+      "height": 512,
+      "hasAlpha": true,
+      "bytes": 76568,
+      "format": "png"
+    }
+  ]
+}

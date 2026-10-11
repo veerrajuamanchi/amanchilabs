@@ -1,5 +1,12 @@
 .overview-panel { min-height: 100%; background: var(--color-canvas); }
 .overview-panel__hero { padding: clamp(32px, 6vh, 64px) 64px 40px; }
+.overview-panel__section-nav { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 8px 64px; border-top: 1px solid var(--color-line); }
+.overview-panel__section-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-muted); font-size: 13px; text-decoration: none; }
+.overview-panel__section-nav a:hover, .overview-panel__section-nav a[aria-current] { color: var(--color-ownership-ink); text-decoration: underline; text-underline-offset: 4px; }
+.overview-panel__section-nav a:focus-visible { outline: 2px solid var(--color-ownership-ink); outline-offset: 3px; }
+.overview-panel__heading:focus, .overview-panel__section h2:focus { outline: none; }
+.overview-panel__heading:focus-visible, .overview-panel__section h2:focus-visible { outline: 2px solid var(--color-ownership-ink); outline-offset: 4px; }
+.overview-panel__section h2 { scroll-margin-top: 24px; }
 .overview-panel__eyebrow { font-size: 11px; font-weight: 500; color: var(--color-muted); line-height: 1.5; }
 .overview-panel__heading { margin-top: 22px; max-width: 850px; font-family: var(--font-display); font-size: 64px; font-weight: 400; line-height: 1.04; }
 .overview-panel__heading em { color: var(--color-ownership-ink); }
@@ -42,12 +49,13 @@
 .overview-panel__discovery .overview-panel__cta { margin-top: 18px; }
 
 @media (max-width: 1199px) and (min-width: 768px) {
-  .overview-panel__hero, .overview-panel__section, .overview-panel__signature { padding-left: 40px; padding-right: 40px; }
+  .overview-panel__hero, .overview-panel__section, .overview-panel__signature, .overview-panel__section-nav { padding-left: 40px; padding-right: 40px; }
   .overview-panel__heading { font-size: 52px; }
 }
 
 @media (max-width: 767px) {
   .overview-panel__hero { padding: 48px 24px 32px; }
+  .overview-panel__section-nav { padding: 8px 24px; gap: 4px 20px; }
   .overview-panel__heading { font-size: 40px; line-height: 1.08; margin-top: 20px; }
   .overview-panel__sub { font-size: 15px; margin-top: 20px; }
   .overview-panel__positioning { font-size: 14px; margin-top: 12px; }

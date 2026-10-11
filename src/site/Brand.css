@@ -1,0 +1,5 @@
+.brand { display: inline-flex; align-items: center; max-width: 100%; text-decoration: none; }
+.brand img { display: block; width: 179.2px; max-width: 100%; height: auto; aspect-ratio: 6.4; object-fit: contain; }
+.brand:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; }
+.brand-footer:focus-visible { outline-color: var(--color-wealth-text); }
+.mobile-nav__brand .brand, .mobile-drawer__header .brand { min-height: 44px; }

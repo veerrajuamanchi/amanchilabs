@@ -3,6 +3,10 @@
 Date: 2026-10-10
 Status: Website inventory complete; independent product evidence unavailable. Publication blocked.
 
+## Subsequent Owner Confirmation (2026-10-11)
+
+The product owner stated that the earlier requirements came from the agent that built the apps and instructed the website assistant to consider the earlier gate resolved. Treat that as owner-attested confirmation, not independent source/runtime verification by this assistant. The historical inventory below records evidence available at the time; its earlier publication-blocked status does not override that later owner decision. New AI-routing/provider-selection details are proposed as intentions until reviewed. The latest request requires proposed copy and a verification summary before production content changes; see [messaging review](../brand/MESSAGING_REVIEW.md). Merge, push, and deployment still require explicit authorization.
+
 ## Evidence Boundary
 
 Only the Amanchi Labs website workspace was provided and inspected. No actual WealthPrivate or DermaPrivate implementation repository, release/commit-specific audit, provider policy evidence, or product-owner sign-off was supplied. Website text, illustrative mockups, and a reachable external landing page are not verification of product behavior.

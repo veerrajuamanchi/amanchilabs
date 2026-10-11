@@ -1,4 +1,4 @@
-import { useHashRouter, type PanelId } from './hooks/useHashRouter'
+import { useHashRouter, type PanelId, type OverviewSection } from './hooks/useHashRouter'
 import { Sidebar } from './components/Sidebar'
 import { MobileNav } from './components/MobileNav'
 import { PanelShell } from './components/PanelShell'
@@ -9,9 +9,9 @@ import { DermaPanel } from './panels/DermaPanel'
 import { PrinciplesPanel } from './panels/PrinciplesPanel'
 import { ContactPanel } from './panels/ContactPanel'
 
-function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
+function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void, overviewSection: OverviewSection | null) {
   switch (activePanel) {
-    case 'overview': return <OverviewPanel navigate={navigate} />
+    case 'overview': return <OverviewPanel navigate={navigate} section={overviewSection} />
     case 'products': return <ProductsPanel navigate={navigate} />
     case 'wealth': return <WealthPanel navigate={navigate} />
     case 'derma': return <DermaPanel />
@@ -21,13 +21,13 @@ function renderPanel(activePanel: PanelId, navigate: (panel: PanelId) => void) {
 }
 
 export default function App() {
-  const { activePanel, navigate } = useHashRouter()
+  const { activePanel, navigate, overviewSection } = useHashRouter()
   return (
     <>
       <Sidebar activePanel={activePanel} navigate={navigate} />
       <MobileNav activePanel={activePanel} navigate={navigate} />
       <PanelShell activePanel={activePanel}>
-        {renderPanel(activePanel, navigate)}
+        {renderPanel(activePanel, navigate, overviewSection)}
       </PanelShell>
     </>
   )

@@ -30,7 +30,7 @@ export function DermaPanel() {
         >
           Explore DermaPrivate <ExternalIcon className="derma-panel__cta-icon" />
         </a>
-        <p className="derma-panel__trust">Core planning is local-first. AI is optional and user-initiated.</p>
+        <p className="derma-panel__trust">Our design goal is local-first routine planning with optional, user-initiated AI assistance. Information sent to an external provider is subject to its policies; integration details vary by product.</p>
       </div>
       <div className="derma-panel__visual">
         <RoutinePhone />

@@ -1,22 +1,27 @@
 import { useCallback, useEffect, useState } from 'react'
 
 export type PanelId = 'overview' | 'products' | 'wealth' | 'derma' | 'principles' | 'contact'
+export type OverviewSection = 'vision' | 'why' | 'approach'
+type Route = { activePanel: PanelId; overviewSection: OverviewSection | null }
 
 const VALID_PANELS: readonly PanelId[] = ['overview', 'products', 'wealth', 'derma', 'principles', 'contact']
 
-function parsePanelFromHash(hash: string): PanelId {
+function parseRouteFromHash(hash: string): Route {
   const raw = hash.replace(/^#/, '')
-  return (VALID_PANELS.includes(raw as PanelId) ? raw : 'overview') as PanelId
+  if (raw === 'overview/vision' || raw === 'overview/why' || raw === 'overview/approach') {
+    return { activePanel: 'overview', overviewSection: raw.split('/')[1] as OverviewSection }
+  }
+  return { activePanel: VALID_PANELS.includes(raw as PanelId) ? raw as PanelId : 'overview', overviewSection: null }
 }
 
-export function useHashRouter(): { activePanel: PanelId; navigate: (panel: PanelId) => void } {
-  const [activePanel, setActivePanel] = useState<PanelId>(() =>
-    parsePanelFromHash(window.location.hash)
+export function useHashRouter(): Route & { navigate: (panel: PanelId) => void } {
+  const [route, setRoute] = useState<Route>(() =>
+    parseRouteFromHash(window.location.hash)
   )
 
   useEffect(() => {
     function onHashChange() {
-      setActivePanel(parsePanelFromHash(window.location.hash))
+      setRoute(parseRouteFromHash(window.location.hash))
     }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
@@ -28,5 +33,5 @@ export function useHashRouter(): { activePanel: PanelId; navigate: (panel: Panel
     window.location.hash = '#' + panel
   }, [])
 
-  return { activePanel, navigate }
+  return { ...route, navigate }
 }

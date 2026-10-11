@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amanchi Labs | Switchable Overview Review</title>
+  <link rel="stylesheet" href="../../src/tokens.css">
+  <link rel="stylesheet" href="../../src/site/Brand.css">
+  <link rel="stylesheet" href="../../src/site/components/Sidebar.css">
+  <link rel="stylesheet" href="../../src/site/components/NavItem.css">
+  <link rel="stylesheet" href="../../src/site/components/MobileNav.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; color: var(--color-ink); background: var(--color-canvas); font-family: var(--font-ui); }
+    h1, h2, h3, p, figure { margin: 0; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--color-ownership-ink); outline-offset: 3px; }
+    .skip-link { position: fixed; top: 8px; left: 8px; z-index: 300; transform: translateY(-160%); padding: 12px; background: var(--color-canvas); }
+    .skip-link:focus { transform: none; }
+    .brand img { aspect-ratio: 6.4; }
+    .workspace { position: fixed; inset: 0 0 0 240px; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+    .introduction { padding: 16px 48px 20px; border-bottom: 1px solid var(--color-line); background: var(--color-canvas); }
+    .eyebrow { font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--color-muted); }
+    h1 { max-width: 850px; margin-top: 14px; font-family: var(--font-display); font-size: 44px; font-weight: 400; line-height: 1.08; }
+    h1 em { color: var(--color-ownership-ink); }
+    .intro-copy { max-width: 720px; margin-top: 14px; color: var(--color-muted); font-size: 14px; line-height: 1.65; }
+    .section-nav { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: 0; }
+    .section-nav a { display: inline-flex; align-items: center; min-height: 48px; font-size: 13px; text-decoration: none; color: var(--color-muted); border-bottom: 2px solid transparent; }
+    .section-nav a[aria-current] { border-color: var(--color-ownership-ink); color: var(--color-ink); font-weight: 500; }
+    .section-nav a:hover { color: var(--color-ownership-ink); }
+    .selected-content { min-height: 0; overflow-y: auto; padding: 28px 48px 32px; }
+    .selected-content article { max-width: 960px; animation: content-in 150ms ease-in-out; }
+    .workspace { --view-accent: #365B46; --view-tint: #F2F6F1; --view-rule: #D3DED3; }
+    .workspace[data-view="approach"] { --view-accent: #236861; --view-tint: #EFF7F5; --view-rule: #C7DEDA; }
+    .workspace[data-view="products"] { --view-accent: #455A67; --view-tint: #F3F5F6; --view-rule: #D6DEE2; }
+    .workspace[data-view="contact"] { --view-accent: #476953; --view-tint: #F2F6F1; --view-rule: #D3DED3; }
+    .workspace[data-view="wealth"] { --view-accent: #455A67; --view-tint: #F3F5F6; --view-rule: #D6DEE2; }
+    .workspace[data-view="derma"] { --view-accent: #496B4D; --view-tint: #F0F5ED; --view-rule: #CCDCC7; }
+    .workspace[data-view="wealth"] .selected-content { --color-ink: #F0F0EC; --color-muted: #C8CDD0; --color-line: #41494F; --view-accent: #C5D4DA; --view-rule: #41494F; background: #202629; color: #F0F0EC; }
+    .workspace[data-view="wealth"] .command { background: #C5D4DA; color: #202629; }
+    .workspace[data-view="derma"] .selected-content { --color-ink: #F0F0EC; --color-muted: #C8D0C7; --color-line: #414D45; --view-accent: #BCD4B5; --view-rule: #414D45; background: #202629; color: #F0F0EC; }
+    .workspace[data-view="derma"] .command { background: #BCD4B5; color: #202629; }
+    .product-detail { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; margin-top: 20px; }
+    .product-detail > div { min-width: 0; }
+    .product-detail h3 { font-family: var(--font-display); font-size: 27px; font-weight: 400; line-height: 1.2; }
+    .product-detail p, .product-detail li { margin-top: 12px; color: var(--color-muted); font-size: 14px; line-height: 1.7; }
+    .product-detail ul { padding-left: 18px; }
+    .product-actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+    .return-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 22px; font-size: 13px; color: var(--view-accent); text-underline-offset: 4px; }
+    .section-nav a[data-parent-active] { color: var(--view-accent); border-color: var(--view-accent); }
+    .product-disclosure { margin-top: 20px; font-size: 12px; line-height: 1.7; color: var(--color-muted); }
+    .introduction { border-bottom-color: var(--view-rule); }
+    .introduction h1 em, .section-nav a[aria-current] { color: var(--view-accent); }
+    .section-nav a[aria-current] { border-color: var(--view-accent); }
+    .selected-content { background: var(--view-tint); }
+    .selected-content h2, .selected-content .eyebrow { color: var(--view-accent); }
+    .selected-content .command { background: var(--view-accent); }
+    .brand-signature { max-width: 960px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--view-rule); font-size: 12px; line-height: 1.7; color: var(--view-accent); }
+    .brand-signature strong, .brand-signature span { display: block; }
+    .brand-signature strong { font-weight: 500; }
+    .workspace[data-view="approach"] .provider { border-color: #39827B; background: #E2F1EF; }
+    .workspace[data-view="approach"] .provider strong { color: #236861; }
+    .workspace[data-view="products"] .content-grid > div:first-child { border-top-color: #455A67; }
+    .workspace[data-view="products"] .content-grid > div:last-child { border-top-color: #71896A; }
+    .workspace[data-view="contact"] .selected-content { --color-ink: #F0F0EC; --color-muted: #C3CCC5; --color-line: #414D45; --view-accent: #BDD4BC; --view-rule: #414D45; background: #1C2520; color: #F0F0EC; }
+    .workspace[data-view="contact"] .command { background: #BDD4BC; color: #1C2520; }
+    .workspace[data-view="contact"] .signature { border-color: #414D45; color: #C3CCC5; }
+    body[data-palette="neutral"] .workspace { --view-accent: var(--color-ownership-ink); --view-tint: var(--color-canvas); --view-rule: #D3DED3; }
+    body[data-palette="neutral"] .workspace .selected-content { --view-accent: #52684B; --color-ink: #1C1C1C; --color-muted: #6B6B6B; --color-line: rgba(0,0,0,.06); --view-rule: #D3DED3; background: var(--color-canvas); color: #1C1C1C; }
+    body[data-palette="neutral"] .workspace .provider { background: transparent; border-color: var(--color-derma-heading); }
+    body[data-palette="neutral"] .workspace .command { background: var(--color-ink); color: var(--color-canvas); }
+    h2 { margin-top: 14px; font-family: var(--font-display); font-size: 36px; font-weight: 400; line-height: 1.12; }
+    h2:focus { outline: none; }
+    h2:focus-visible { outline: 2px solid var(--color-ownership-ink); outline-offset: 4px; }
+    .body-copy { max-width: 700px; margin-top: 16px; font-size: 15px; line-height: 1.7; color: var(--color-muted); }
+    .body-copy p + p { margin-top: 12px; }
+    .ownership-line { margin-top: 22px; font-family: var(--font-display); font-size: 28px; line-height: 1.2; }
+    .signature { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-top: 18px; margin-top: 24px; border-top: 1px solid var(--color-line); font-size: 12px; line-height: 1.7; color: var(--color-ownership-ink); }
+    .command { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 22px; padding: 12px 18px; border-radius: 6px; background: var(--color-ink); color: var(--color-canvas); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .content-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-top: 20px; }
+    .content-grid > div { min-width: 0; border-top: 1px solid var(--color-line); padding-top: 14px; }
+    .content-grid h3 { font-family: var(--font-display); font-size: 25px; font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; }
+    .content-grid p { margin-top: 8px; font-size: 13px; line-height: 1.65; color: var(--color-muted); }
+    .contact-details { display: grid; gap: 16px; margin-top: 22px; }
+    .contact-details a { display: block; padding: 14px 0; border-top: 1px solid var(--color-line); text-decoration: none; overflow-wrap: anywhere; }
+    .contact-details span { display: block; font-size: 12px; color: var(--color-muted); margin-bottom: 6px; }
+    .flow { display: grid; grid-template-columns: 1fr 32px 1.25fr 1.05fr 1.25fr; gap: 14px; align-items: center; margin-top: 22px; }
+    .flow > div { min-width: 0; }
+    .flow strong { display: block; font-size: 17px; font-weight: 500; line-height: 1.5; }
+    .flow span { display: block; margin-top: 7px; font-size: 12px; line-height: 1.6; color: var(--color-muted); }
+    .device { padding: 20px 16px; background: var(--color-ownership-bg); border: 1px solid var(--color-ownership-border); border-radius: 6px; text-align: center; }
+    .provider { padding: 20px 16px; border: 1px dashed var(--color-derma-heading); border-radius: 6px; }
+    .connection { text-align: center; font-size: 11px; line-height: 1.6; color: var(--color-muted); }
+    .connection .dashed { position: relative; margin: 12px 0; border-top: 1px dashed var(--color-derma-heading); }
+    .dashed::after { content: '\2192'; position: absolute; top: -11px; right: 0; font-size: 16px; line-height: 20px; }
+    .local-arrow { font-size: 24px; }
+    figcaption { margin-top: 16px; color: var(--color-muted); font-size: 12px; line-height: 1.65; max-width: 900px; }
+    figcaption p + p { margin-top: 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    dialog { position: fixed; inset: 0; margin: 0; width: 100%; max-width: none; height: 100%; max-height: none; padding: 0; border: 0; background: var(--color-canvas); color: var(--color-ink); }
+    .mobile-drawer__header .brand { min-height: 44px; }
+    .mobile-drawer__close { border: 0; }
+    @keyframes content-in { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 1199px) { .introduction { padding: 12px 32px 20px; } .selected-content { padding: 24px 32px; } h1 { font-size: 40px; } }
+    @media (max-width: 1023px) { .workspace { inset: 56px 0 0; } }
+    @media (max-width: 767px) {
+      .introduction { padding: 8px 24px 18px; }
+      h1 { font-size: 30px; line-height: 1.08; margin-top: 10px; }
+      .intro-copy { margin-top: 10px; font-size: 13px; line-height: 1.6; }
+      .section-nav { gap: 0 18px; margin-top: 0; }
+      .section-nav a { min-height: 44px; font-size: 12px; }
+      .selected-content { padding: 22px 24px 28px; }
+      h2 { font-size: 30px; margin-top: 12px; }
+      .body-copy { font-size: 14px; margin-top: 14px; }
+      .ownership-line { font-size: 26px; }
+      .flow { grid-template-columns: 1fr; gap: 14px; }
+      .content-grid { grid-template-columns: 1fr; }
+      .product-detail { grid-template-columns: 1fr; gap: 24px; }
+      .person, .provider { text-align: center; }
+      .flow .local-arrow { display: none; }
+      .connection .dashed { max-width: 80px; margin: 10px auto; }
+    }
+    @media (max-height: 600px) { .introduction { padding-top: 8px; } h1 { font-size: 30px; } .intro-copy { margin-top: 8px; } }
+    @media (max-height: 450px) { .workspace { position: absolute; display: block; min-height: calc(100% - 56px); } .selected-content { overflow: visible; } }
+    @media (prefers-reduced-motion: reduce) { .selected-content article { animation: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#selected-heading">Skip to selected content</a>
+  <aside class="sidebar">
+    <div class="sidebar__brand"><a class="brand" href="#overview" aria-label="Amanchi Labs - Overview"><img src="/brand/logo-header.png" alt="" width="640" height="100"></a></div>
+    <nav class="sidebar__nav" aria-label="Primary navigation">
+      <div class="sidebar__links"><a class="nav-item nav-item--active" href="#overview" aria-current="page">Overview</a><a class="nav-item" href="/#products">Products</a><a class="nav-item" href="/#principles">Principles</a></div>
+      <div class="sidebar__foot"><a class="nav-item sidebar__contact" href="/#contact">Contact</a><p class="sidebar__copy">&copy; 2026 Amanchi Labs</p></div>
+    </nav>
+  </aside>
+  <header class="mobile-nav"><a class="brand" href="#overview" aria-label="Amanchi Labs - Overview"><img src="/brand/logo-header.png" alt="" width="640" height="100"></a><button class="mobile-nav__toggle" id="open-menu" type="button" aria-label="Open navigation menu" aria-haspopup="dialog"><span class="mobile-nav__hamburger" aria-hidden="true"><span></span><span></span><span></span></span></button></header>
+  <main class="workspace">
+    <header class="introduction">
+      <nav class="section-nav" aria-label="Company sections"><a href="#overview" data-section="vision">Our Vision</a><a href="#overview/why" data-section="why">Why It Matters</a><a href="#overview/approach" data-section="approach">Our Approach</a><a href="#principles" data-section="principles">Principles</a><a href="#products" data-section="products">Products</a><a href="#contact" data-section="contact">Contact</a></nav>
+      <h1>Your life is personal.<br><em>Your technology should respect that.</em></h1>
+      <p class="intro-copy">Intelligent, local-first applications designed around ownership, independence, and optional AI.</p>
+    </header>
+    <div class="selected-content" id="selected-content"></div>
+    <p class="sr-only" role="status" id="announcement"></p>
+  </main>
+  <template id="vision-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">OUR VISION</p><h2 id="selected-heading" tabindex="-1">Your app. Your device. Your information.</h2><div class="body-copy"><p>We believe powerful software should work for you without requiring you to hand over your personal information.</p><p>Our goal is intelligent, local-first applications that work independently on your device, without requiring an account, cloud storage of personal documents, or a constant internet connection.</p><p>When you want more intelligence, optional external AI integrations put that choice in your hands. Product capabilities and requirements vary; these are design goals.</p></div><p class="signature"><span>Private by Design. Local by Default.</span><span>Your Data. Your Device. Your Control.</span></p><a class="command" href="/#products">Explore our products <span aria-hidden="true">&rarr;</span></a></article>
+  </template>
+  <template id="why-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">WHY IT MATTERS</p><h2 id="selected-heading" tabindex="-1">Your life is not a dataset.</h2><div class="body-copy"><p>Your financial records, routines, conversations, and personal documents are parts of your life. Using an application shouldn't automatically turn them into another company's stored asset.</p><p>Connected services can be valuable. But convenience should come with understandable choices about where information goes and who can access it.</p><p>Local processing can reduce unnecessary exposure. It doesn't eliminate security risks, and external AI providers have their own data-handling policies.</p></div><p class="ownership-line">Useful software. Meaningful independence.</p><a class="command" href="#overview/approach">Our approach <span aria-hidden="true">&rarr;</span></a></article>
+  </template>
+  <template id="approach-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">OUR APPROACH</p><h2 id="selected-heading" tabindex="-1">Local-first by design. AI-enabled by choice.</h2><p class="body-copy">Design for personal information to stay on your device. When you initiate an optional AI request, your app sends authorized information to the external provider used by that integration.</p><figure aria-label="Conceptual local workflow with a separate optional external AI transfer"><div class="flow"><div class="person"><strong>You</strong><span>Choose your information</span></div><span class="local-arrow" aria-hidden="true">&rarr;</span><div class="device"><strong>Your device</strong><span>Personal application<br>Local storage and processing</span></div><div class="connection">Optional transfer<span class="dashed" aria-hidden="true"></span>Only when you initiate</div><div class="provider"><strong>External AI</strong><span>Authorized information<br>Provider policies apply</span></div></div><figcaption><p>Our intended architecture avoids routing personal AI-request content through Amanchi Labs servers. Your app still prepares and handles the request and response. The provider may process or retain submitted information under its own policies.</p><p>Illustrative design philosophy, not a verified representation of every application. Storage, accounts, offline behavior, consent, routing, and other transfers require product-specific verification.</p></figcaption></figure><a class="command" href="/#principles">Explore our principles <span aria-hidden="true">&rarr;</span></a></article>
+  </template>
+  <dialog id="menu" aria-label="Navigation menu"><div class="mobile-drawer__header"><a class="brand" href="#overview" aria-label="Amanchi Labs - Overview"><img src="/brand/logo-header.png" alt="" width="640" height="100"></a><button class="mobile-drawer__close" id="close-menu" type="button" aria-label="Close navigation menu">&times;</button></div><nav aria-label="Mobile navigation"><a class="mobile-drawer__item is-active" href="#overview">Overview</a><a class="mobile-drawer__item" href="/#products">Products</a><a class="mobile-drawer__item" href="/#principles">Principles</a><a class="mobile-drawer__item" href="/#contact">Contact</a></nav></dialog>
+  <template id="principles-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">PRINCIPLES</p><h2 id="selected-heading" tabindex="-1">Technology should work for you.</h2><div class="content-grid"><div><h3>Private by design</h3><p>Design to store and process personal information on your device, minimizing unnecessary collection and centralized storage of personal documents.</p></div><div><h3>AI on your terms</h3><p>Design optional, user-initiated AI integrations that explain what is sent to the external provider. Provider policies still apply.</p></div><div><h3>You stay in control</h3><p>Make storage and sharing understandable, and design meaningful choices about what to retain, send, export, or remove.</p></div><div><h3>Made for real life</h3><p>Useful personal tools should not require unnecessary accounts or uploads. These are design goals, not universal product guarantees.</p></div></div><a class="command" href="#products">Explore our products <span aria-hidden="true">&rarr;</span></a></article>
+  </template>
+  <template id="products-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">PRODUCTS</p><h2 id="selected-heading" tabindex="-1">Personal applications. A shared philosophy.</h2><div class="content-grid"><div><p class="eyebrow">IN DEVELOPMENT</p><h3>WealthPrivate</h3><p>A financial application being developed to help organize personal documents and understand your financial history.</p><a class="command" href="http://127.0.0.1:5175/#wealth">Discover WealthPrivate <span aria-hidden="true">&rarr;</span></a></div><div><p class="eyebrow">SKINCARE &amp; PERSONAL ROUTINES</p><h3>DermaPrivate</h3><p>Explore skincare planning, personal routines, and ingredient-aware information.</p><a class="command" href="http://127.0.0.1:5175/#derma">Discover DermaPrivate <span aria-hidden="true">&rarr;</span></a></div></div><p class="body-copy">Local-first by design. AI-enabled by choice. Available integrations and data-handling practices vary by product.</p><a class="command" href="#overview">Back to Our Vision <span aria-hidden="true">&larr;</span></a></article>
+  </template>
+  <template id="contact-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">CONTACT</p><h2 id="selected-heading" tabindex="-1">Let's build something useful.</h2><p class="body-copy">Thoughtful questions, product feedback, or a good idea for a useful app &mdash; we'd like to hear from you.</p><div class="contact-details"><a href="mailto:founder@amanchilabs.com?subject=Hello%20Amanchi%20Labs"><span>Partnerships &amp; business</span>founder@amanchilabs.com</a><a href="mailto:support@amanchilabs.com?subject=Product%20support"><span>Product support</span>support@amanchilabs.com</a></div><a class="command" href="#overview">Back to Our Vision <span aria-hidden="true">&larr;</span></a><p class="signature">&copy; 2026 Amanchi Labs &middot; Independent product studio</p></article>
+  </template>
+  <template id="wealth-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">WEALTHPRIVATE / IN DEVELOPMENT</p><h2 id="selected-heading" tabindex="-1">Your wealth. Your data. Your control.</h2><div class="product-detail"><div><h3>A clearer view of your financial life.</h3><p>WealthPrivate is being developed to help organize personal financial documents and understand the history behind them.</p><p>Local-first by design. AI-enabled by choice. The aim is to work with information on your device, with optional external AI assistance when you initiate it.</p></div><div><h3>Built around your information.</h3><ul><li>Personal financial documents and their history</li><li>Clear connections to original sources</li><li>Optional AI with understandable data-sharing choices</li></ul></div></div><p class="product-disclosure">Design direction, not a released-feature guarantee. Actual storage, source tracing, AI routing, consent, and provider behavior require product-specific verification.</p><div class="product-actions"><a class="command" href="mailto:founder@amanchilabs.com?subject=WealthPrivate%20inquiry">Get in touch about WealthPrivate <span aria-hidden="true">&rarr;</span></a><a class="return-link" href="#products">Back to Products</a></div></article>
+  </template>
+  <template id="derma-content">
+    <article aria-labelledby="selected-heading"><p class="eyebrow">DERMAPRIVATE / PERSONAL ROUTINES</p><h2 id="selected-heading" tabindex="-1">Personalized skincare. On your terms.</h2><div class="product-detail"><div><h3>Make room for your routine.</h3><p>Explore skincare planning, personal routines, and ingredient-aware information in a focused personal application.</p><p>Our design goal is local-first planning with optional, user-initiated AI assistance, rather than requiring your entire personal history to be uploaded.</p></div><div><h3>Your decisions come first.</h3><ul><li>A thoughtful approach to daily skincare routines</li><li>Ingredient information to support understanding</li><li>AI assistance as a choice, not a requirement</li></ul></div></div><p class="product-disclosure">Product capabilities and integrations vary. External AI providers may process or retain submitted information under their own policies.</p><div class="product-actions"><a class="command" href="https://dermaprivate-website.onrender.com/index.html" target="_blank" rel="noopener noreferrer">Explore DermaPrivate <span aria-hidden="true">&nearr;</span></a><a class="return-link" href="#products">Back to Products</a></div></article>
+  </template>
+  <script>
+    document.body.dataset.palette = new URLSearchParams(location.search).get('palette') === 'neutral' ? 'neutral' : 'color';
+    const content = document.querySelector('#selected-content');
+    const menu = document.querySelector('#menu');
+    document.querySelector('#derma-content').content.querySelector('.eyebrow').textContent = 'DERMAPRIVATE / IN TESTING';
+    document.querySelector('#products-content').content.querySelector('.content-grid > div:last-child .eyebrow').textContent = 'IN TESTING';
+    const productMenu = menu.querySelector('nav');
+    productMenu.setAttribute('aria-label', 'Applications');
+    productMenu.replaceChildren();
+    for (const [hash, name] of [['wealth', 'WealthPrivate'], ['derma', 'DermaPrivate']]) {
+      const link = document.createElement('a');
+      link.className = 'mobile-drawer__item';
+      link.href = '#' + hash;
+      link.textContent = name;
+      productMenu.append(link);
+    }
+    document.querySelector('#open-menu').setAttribute('aria-label', 'Open applications menu');
+    document.querySelector('#products-content').content.querySelectorAll('a[href^="http://127.0.0.1:5175/#"]').forEach(link => link.setAttribute('href', '#' + link.getAttribute('href').split('#')[1]));
+    document.querySelectorAll('a[href^="/#"]').forEach(link => link.setAttribute('href', link.getAttribute('href').slice(1)));
+    const visionCommand = document.querySelector('#vision-content').content.querySelector('.command');
+    visionCommand.setAttribute('href', '#overview/why');
+    visionCommand.firstChild.textContent = 'Why It Matters ';
+    document.querySelector('#approach-content').content.querySelector('.command').setAttribute('href', '#principles');
+    let activeSection;
+    function renderSection(moveFocus) {
+      const panel = location.hash.slice(1);
+      const section = ['principles', 'products', 'contact', 'wealth', 'derma'].includes(panel) ? panel : panel === 'overview/why' ? 'why' : panel === 'overview/approach' ? 'approach' : 'vision';
+      if (section === activeSection) return;
+      activeSection = section;
+      document.querySelector('.workspace').dataset.view = section;
+      content.replaceChildren(document.querySelector('#' + section + '-content').content.cloneNode(true));
+      if (section === 'vision') content.querySelector('.signature')?.remove();
+      const footer = document.createElement('footer');
+      footer.className = 'brand-signature';
+      const philosophy = document.createElement('strong');
+      philosophy.textContent = 'Private by Design. Local by Default.';
+      const promise = document.createElement('span');
+      promise.textContent = 'Your Data. Your Device. Your Control.';
+      footer.append(philosophy, promise);
+      content.append(footer);
+      document.querySelectorAll('[data-section]').forEach(link => {
+        if (link.dataset.section === 'products' && ['wealth', 'derma'].includes(section)) link.setAttribute('data-parent-active', '');
+        else link.removeAttribute('data-parent-active');
+        if (link.dataset.section === section) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      document.querySelector('#announcement').textContent = document.querySelector('#selected-heading').textContent;
+      document.querySelectorAll('.sidebar__nav a, .mobile-drawer__item').forEach(link => {
+        const current = link.getAttribute('href') === (['vision', 'why', 'approach'].includes(section) ? '#overview' : '#' + section);
+        link.classList.toggle('nav-item--active', current && link.classList.contains('nav-item'));
+        link.classList.toggle('is-active', current && link.classList.contains('mobile-drawer__item'));
+        if (current) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+      if (moveFocus) document.querySelector('#selected-heading').focus({ preventScroll: true });
+    }
+    renderSection(false);
+    window.addEventListener('hashchange', () => renderSection(true));
+    document.querySelector('#open-menu').addEventListener('click', () => menu.showModal());
+    document.querySelector('#close-menu').addEventListener('click', () => menu.close());
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.close()));
+    document.querySelector('.section-nav').addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      const links = Array.from(document.querySelectorAll('[data-section]'));
+      const index = links.indexOf(document.activeElement);
+      if (index < 0) return;
+      event.preventDefault();
+      links[(index + (event.key === 'ArrowRight' ? 1 : -1) + links.length) % links.length].focus();
+    });
+  </script>
+</body>
+</html>

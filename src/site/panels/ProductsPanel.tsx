@@ -30,7 +30,7 @@ export function ProductsPanel({ navigate }: Props) {
           </button>
         </article>
       </div>
-      <p className="products-panel__intro">Each Amanchi Labs application is designed with privacy in mind. Features and data-handling practices vary by product; explore each application to learn how it works.</p>
+      <p className="products-panel__intro">Local-first by design. AI-enabled by choice. Each application is designed with privacy in mind; available integrations and data-handling practices vary by product. Explore each application to learn how it works.</p>
       <button className="products-panel__action" type="button" onClick={() => navigate('overview')}>
         Back to Overview <ArrowIcon className="products-panel__back-icon" aria-hidden="true" />
       </button>

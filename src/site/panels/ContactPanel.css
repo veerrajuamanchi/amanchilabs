@@ -78,6 +78,10 @@
 }
 
 .contact-panel__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   font-family: var(--font-ui);
   font-size: 11px;
   color: rgba(240, 240, 236, 0.52);
@@ -85,6 +89,10 @@
 }
 
 @media (max-width: 767px) {
+  .contact-panel__privacy { align-self: flex-start; }
   .contact-panel { padding: 40px 24px; align-items: flex-start; }
   .contact-panel__link-email { overflow-wrap: anywhere; }
 }
+
+.contact-panel__privacy { display: inline-flex; align-items: center; min-height: 44px; color: inherit; }
+.contact-panel__privacy:focus-visible { outline: 2px solid var(--color-wealth-text); outline-offset: 4px; }

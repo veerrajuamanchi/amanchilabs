@@ -1,10 +1,10 @@
 import './PrinciplesPanel.css'
 
 const principles = [
-  { number: '01', title: 'Private by design', body: 'Privacy belongs in the architecture from the first sketch, not in a policy paragraph at the end.' },
-  { number: '02', title: 'Intelligent by choice', body: 'AI should improve understanding and reduce effort — visible, optional, and never quietly in charge.' },
-  { number: '03', title: 'You stay in control', body: 'A suggestion is a starting point. People decide what to save, change, or leave behind.' },
-  { number: '04', title: 'Made for real life', body: 'Focused tools for ordinary moments — carefully made, useful, and easy to understand.' },
+  { number: '01', title: 'Private by design', body: 'Design to store and process personal information on your device, minimizing unnecessary collection and centralized storage of personal documents.' },
+  { number: '02', title: 'AI on your terms', body: 'Design optional, user-initiated AI integrations that explain what is sent to the external provider. Provider policies still apply.' },
+  { number: '03', title: 'You stay in control', body: 'Make storage and sharing understandable, and design meaningful choices about what to retain, send, export, or remove.' },
+  { number: '04', title: 'Made for real life', body: 'Useful personal tools should not require unnecessary accounts or uploads. These are design goals, not universal product guarantees.' },
 ]
 
 export function PrinciplesPanel() {

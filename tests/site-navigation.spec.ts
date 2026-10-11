@@ -45,7 +45,11 @@ test('mobile drawer traps focus and restores it on Escape', async ({ page }) => 
   await expect(close).toBeFocused()
   await expect(page.locator('#main-content')).toHaveAttribute('inert', '')
   await page.keyboard.press('Shift+Tab')
+  await expect(dialog.getByRole('link', { name: 'Amanchi Labs — go to overview' })).toBeFocused()
+  await page.keyboard.press('Shift+Tab')
   await expect(dialog.getByRole('link', { name: 'Contact', exact: true })).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(dialog.getByRole('link', { name: 'Amanchi Labs — go to overview' })).toBeFocused()
   await page.keyboard.press('Tab')
   await expect(close).toBeFocused()
   await page.keyboard.press('Escape')
@@ -115,7 +119,7 @@ test('desktop keyboard navigation, brand, and skip link work', async ({ page }) 
 test('Overview copy, diagram, and actions follow the approved narrative', async ({ page }) => {
   await page.goto('/#overview')
   await expect(page.locator(activeCanvas + ' article')).toHaveCount(0)
-  for (const heading of ['Your life is not a dataset.', 'Not everything needs the cloud.', 'Intelligence without unnecessary exposure.', 'Your information remains yours.', 'Your information. Your decision.']) {
+  for (const heading of ['Your life is not a dataset.', 'Not everything needs the cloud.', 'AI on your terms.', 'Your information remains yours.', 'Your information. Your decision.']) {
     await expect(page.getByRole('heading', { name: heading, exact: true })).toHaveCount(1)
   }
   await expect(page.locator('figcaption')).toContainText('Our design intention:')
@@ -126,7 +130,7 @@ test('Overview copy, diagram, and actions follow the approved narrative', async 
   await page.goBack()
   await page.getByRole('button', { name: 'Explore our products' }).click()
   await expect(page).toHaveURL(/#products$/)
-  await expect(page.locator(activeCanvas)).toContainText('Features and data-handling practices vary by product')
+  await expect(page.locator(activeCanvas)).toContainText('available integrations and data-handling practices vary by product')
 })
 
 for (const [width, height] of [[1440, 900], [1280, 800], [1024, 768], [375, 812], [768, 900], [1023, 768], [1280, 600], [1024, 600]]) {
@@ -250,5 +254,74 @@ test('actual browser zoom preserves routes and reachable content', async ({}, te
   } finally {
     await context.close()
     await rm(profile, { recursive: true, force: true })
+  }
+})
+
+for (const width of [1440, 375]) {
+  test(`Overview section history and focus at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/#overview')
+    const sections = page.getByRole('navigation', { name: 'Overview sections' })
+    await sections.getByRole('link', { name: 'Why It Matters', exact: true }).focus()
+    await page.keyboard.press('Enter')
+    await expect(page).toHaveURL(/#overview\/why$/)
+    await expect(page.locator('#overview-why')).toBeFocused()
+    await expect(page.locator('#overview-why')).toBeInViewport()
+    await page.evaluate(() => { window.location.hash = 'overview/approach' })
+    await expect(page.locator('#overview-approach')).toBeFocused()
+    await page.goBack()
+    await expect(page.locator('#overview-why')).toBeFocused()
+    await page.goForward()
+    await expect(page.locator('#overview-approach')).toBeFocused()
+    await page.reload()
+    await expect(page.locator('#overview-approach')).toBeFocused()
+    await page.evaluate(() => { window.location.hash = 'overview/vision' })
+    await expect(page.locator('#overview-heading')).toBeFocused()
+    expect(await page.locator(activeCanvas).evaluate(element => element.scrollTop)).toBe(0)
+    await sections.getByRole('link', { name: 'Products', exact: true }).click()
+    await expect(page).toHaveURL(/#products$/)
+    await page.goBack()
+    await expect(page.locator('#overview-heading')).toBeFocused()
+    await sections.getByRole('link', { name: 'Contact', exact: true }).click()
+    await expect(page).toHaveURL(/#contact$/)
+    await page.goto('/#overview/invalid')
+    await expect(page.locator(activeCanvas + ' > section')).toHaveClass('overview-panel')
+  })
+}
+
+test('brand metadata and crawler documents match the public company identity', async ({ page, request }) => {
+  await page.goto('/')
+  await expect(page).toHaveTitle('Amanchi Labs | Privacy-First Software Studio')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://amanchilabs.com/')
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://amanchilabs.com/brand/og-image.png')
+  const organization = JSON.parse(await page.locator('script[type="application/ld+json"]').innerText())
+  expect(organization['@type']).toBe('Organization')
+  expect(organization.name).toBe('Amanchi Labs')
+  expect(organization.contactPoint).toHaveLength(2)
+  for (const path of ['/robots.txt', '/sitemap.xml', '/privacy.html', '/brand/favicon.ico', '/brand/favicon-16x16.png', '/brand/favicon-32x32.png', '/brand/apple-touch-icon.png', '/brand/og-image.png', '/brand/logo-header.png', '/brand/logo-footer.png']) {
+    const response = await request.get(path)
+    expect(response.status(), path).toBe(200)
+    expect(response.headers()['content-type'], path).not.toBeUndefined()
+  }
+  const sitemap = await (await request.get('/sitemap.xml')).text()
+  expect(sitemap).toContain('https://amanchilabs.com/privacy.html')
+  expect(sitemap).not.toContain('#overview')
+  expect(await (await request.get('/robots.txt')).text()).toContain('Allow: /')
+  await page.goto('/#contact')
+  await page.getByRole('link', { name: 'Website privacy notice', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Website privacy notice', exact: true })).toBeVisible()
+})
+
+test('company information remains visible without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } })
+  try {
+    const page = await context.newPage()
+    await page.goto(test.info().project.use.baseURL + '/')
+    await expect(page.getByRole('heading', { name: 'Amanchi Labs: Privacy-First Software Studio' })).toBeVisible()
+    await expect(page.getByRole('main')).toContainText('software development and information technology')
+    await expect(page.getByRole('link', { name: 'support@amanchilabs.com', exact: true })).toHaveAttribute('href', 'mailto:support@amanchilabs.com')
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  } finally {
+    await context.close()
   }
 })

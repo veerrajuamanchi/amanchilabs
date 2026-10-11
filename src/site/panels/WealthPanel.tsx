@@ -31,7 +31,7 @@ export function WealthPanel({ navigate: _navigate }: Props) {
           Get in touch <ArrowIcon className="wealth-panel__cta-icon" />
         </a>
         <p className="wealth-panel__trust">
-          WealthPrivate is designed so your financial data stays on your device. We do not store it.
+          WealthPrivate is being designed to organize financial information on your device, with optional AI integrations that aim to avoid routing personal request content through Amanchi Labs servers.
         </p>
       </div>
       <div className="wealth-panel__visual">

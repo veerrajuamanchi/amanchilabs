@@ -28,8 +28,6 @@
 }
 
 .sidebar__brand .brand:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; }
-.sidebar__brand .brand-mark { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.2; }
-.sidebar__brand .brand-space { white-space: pre; }
 
 .sidebar__nav {
   flex: 1;
